@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Prompts Library</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="top-navbar">
+        <div class="nav-brand">
+            <i class="fas fa-book-open"></i>
+            <span>Golden Prompts Library</span>
+        </div>
+        <div class="nav-actions">
+            <button id="configureTopicBtn" class="nav-btn" data-tooltip="Configure Topic">
+                <i class="fas fa-cog"></i>
+                <span>Configure</span>
+            </button>
+            <button id="infoBtn" class="nav-btn" data-tooltip="About & Help">
+                <i class="fas fa-info-circle"></i>
+                <span>Info</span>
+            </button>
+            <button id="darkModeBtn" class="nav-btn" data-tooltip="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+                <span>Theme</span>
+            </button>
+        </div>
+    </nav>
+
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2>Categories</h2>
+            <button id="toggleSidebar" class="toggle-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <ul id="categoryList" class="category-list"></ul>
+    </nav>
+
+    <main class="main-content">
+        <header class="main-header">
+            <h1>Golden Prompts Library</h1>
+
+            <div id="topicFormModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Configure Your Topic</h3>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <form id="topicForm" class="topic-form">
+                        <div class="form-group">
+                            <label for="topicName">Topic Name:</label>
+                            <input type="text" id="topicName" placeholder="Enter your topic" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="topicDescription">Brief Description:</label>
+                            <textarea id="topicDescription" placeholder="Describe your topic"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="industry">Industry:</label>
+                            <input type="text" id="industry" placeholder="Enter industry">
+                        </div>
+                        <button type="submit" class="apply-btn">Apply to All Prompts</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="infoModal" class="modal info-modal">
+                <div class="modal-content info-content">
+                    <div class="modal-header">
+                        <h3>About Golden Prompts Library</h3>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-tab="about">About</button>
+                            <button class="tab-btn" data-tab="guide">User Guide</button>
+                            <button class="tab-btn" data-tab="version">Version Info</button>
+                        </div>
+
+                        <div class="tab-content active" id="about">
+                            <h4>What is Golden Prompts Library?</h4>
+                            <p>Golden Prompts Library is a comprehensive collection of AI prompt templates designed to
+                                help you create high-quality content efficiently. Our library includes prompts for
+                                various purposes including blog writing, SEO optimization, technical documentation, and
+                                more.</p>
+
+                            <h4>Features</h4>
+                            <ul>
+                                <li>🎯 30+ Categories of prompts</li>
+                                <li>📝 Customizable templates</li>
+                                <li>🔍 Advanced search and filtering</li>
+                                <li>📱 Responsive design</li>
+                                <li>🌙 Dark mode support</li>
+                            </ul>
+
+                            <h4>Credits</h4>
+                            <div class="credits">
+                                <h5>Development Team</h5>
+                                <ul>
+                                    <li>
+                                        <strong>Lead Developer:</strong>
+                                        <a href="https://github.com/AnLoMinus" target="_blank">
+                                            <i class="fab fa-github"></i> Ⓒ AnLoMinus
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <strong>AI Assistant:</strong>
+                                        <span>Claude 3 Sonnet (Anthropic)</span>
+                                    </li>
+                                </ul>
+
+                                <h5>Version</h5>
+                                <p>Current Version: 1.0.0</p>
+                                <p>Last Updated: November 3, 2024</p>
+
+                                <h5>License</h5>
+                                <p>© 2024 Golden Prompts Library. All rights reserved.</p>
+                            </div>
+                        </div>
+
+                        <div class="tab-content" id="guide">
+                            <h4>How to Use</h4>
+                            <ol>
+                                <li>
+                                    <strong>Configure Your Topic:</strong>
+                                    <p>Click the "Configure Topic" button to set up your topic details. This will
+                                        automatically replace placeholders in all prompts.</p>
+                                </li>
+                                <li>
+                                    <strong>Browse Categories:</strong>
+                                    <p>Use the sidebar to filter prompts by category. You can select multiple
+                                        categories.</p>
+                                </li>
+                                <li>
+                                    <strong>Search & Sort:</strong>
+                                    <p>Use the search bar to find specific prompts. Sort results by title or category.
+                                    </p>
+                                </li>
+                                <li>
+                                    <strong>Copy Prompts:</strong>
+                                    <p>Hover over any prompt card and click the copy button to copy the content.</p>
+                                </li>
+                            </ol>
+
+                            <h4>Keyboard Shortcuts</h4>
+                            <ul class="shortcuts">
+                                <li><kbd>Ctrl</kbd> + <kbd>K</kbd> Focus search</li>
+                                <li><kbd>Ctrl</kbd> + <kbd>/</kbd> Toggle dark mode</li>
+                                <li><kbd>Esc</kbd> Close modals</li>
+                            </ul>
+                        </div>
+
+                        <div class="tab-content" id="version">
+                            <h4>Current Version</h4>
+                            <p class="version">v1.0.0 (November 2024)</p>
+
+                            <h4>Latest Updates</h4>
+                            <ul class="updates">
+                                <li>✨ Added dark mode support</li>
+                                <li>🚀 Improved search functionality</li>
+                                <li>📱 Enhanced mobile responsiveness</li>
+                                <li>🎨 Added customizable themes</li>
+                                <li>📋 Added copy to clipboard functionality</li>
+                                <li>🔍 Added advanced filtering system</li>
+                                <li>ℹ️ Added comprehensive help guide</li>
+                            </ul>
+
+                            <h4>Coming Soon</h4>
+                            <ul class="upcoming">
+                                <li>💾 Save favorite prompts</li>
+                                <li>📤 Export functionality</li>
+                                <li>🔄 Custom prompt creation</li>
+                                <li>🌐 Multi-language support</li>
+                                <li>🔗 API integration options</li>
+                            </ul>
+
+                            <h4>Release Notes</h4>
+                            <div class="release-notes">
+                                <p><strong>Version 1.0.0</strong> - Released November 3, 2024</p>
+                                <ul>
+                                    <li>Initial release with core functionality</li>
+                                    <li>33+ prompt templates across multiple categories</li>
+                                    <li>Advanced search and filtering system</li>
+                                    <li>Responsive design for all devices</li>
+                                    <li>Dark mode support</li>
+                                    <li>Keyboard shortcuts</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filters-container">
+                <div class="search-container">
+                    <input type="text" id="searchInput" aria-label="Search prompts" placeholder="Search prompts..."
+                        role="searchbox">
+                    <button id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="sort-container">
+                    <select id="sortSelect">
+                        <option value="titleAsc">Title (A-Z)</option>
+                        <option value="titleDesc">Title (Z-A)</option>
+                        <option value="categoryAsc">Category (A-Z)</option>
+                        <option value="categoryDesc">Category (Z-A)</option>
+                    </select>
+                </div>
+                <div class="view-container">
+                    <button id="gridView" class="view-btn active">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button id="listView" class="view-btn">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="active-filters" id="activeFilters"></div>
+        </header>
+
+        <div id="promptsContainer" class="prompts-container grid-view"></div>
+    </main>
+
+    <script src="data/prompts.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
