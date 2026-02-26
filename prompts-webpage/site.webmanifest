@@ -1,0 +1,21 @@
+{
+  "name": "Golden Prompts Library",
+  "short_name": "Prompts Library",
+  "description": "Comprehensive collection of AI prompt templates for content creation",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDFBF7",
+  "theme_color": "#D4AF37",
+  "icons": [
+    {
+      "src": "images/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

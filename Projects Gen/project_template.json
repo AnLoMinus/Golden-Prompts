@@ -1,0 +1,20 @@
+{
+  "project_id": "{{project_id}}",
+  "project_name": "{{project_name}}",
+  "project_owner": "{{project_owner}}",
+  "project_description": "{{project_description}}",
+  "project_start_date": "{{project_start_date}}",
+  "project_end_date": "{{project_end_date}}",
+  "project_status": "{{project_status}}",
+  "project_tasks": [
+    {
+      "task_id": "{{task_id}}",
+      "task_name": "{{task_name}}",
+      "task_description": "{{task_description}}",
+      "task_status": "{{task_status}}",
+      "task_due_date": "{{task_due_date}}"
+    }
+  ],
+  "languages": ["{{language}}"],
+  "technologies": ["{{technology}}"]
+}

@@ -1,0 +1,30 @@
+{
+    "0.5": [
+        {
+            "timestamp": "2024-10-21 03:14:10",
+            "description": "Error exporting to template: 'QLineEdit' object has no attribute 'toPlainText'"
+        }
+    ],
+    "0.6": [
+        {
+            "timestamp": "2024-10-21 03:20:19",
+            "description": "Applied preset: business_configurator"
+        },
+        {
+            "timestamp": "2024-10-21 03:20:28",
+            "description": "Applied preset: general_configurator"
+        },
+        {
+            "timestamp": "2024-10-21 03:20:32",
+            "description": "Applied preset: tech_configurator"
+        },
+        {
+            "timestamp": "2024-10-21 03:21:54",
+            "description": "Applied preset: business_configurator"
+        },
+        {
+            "timestamp": "2024-10-21 03:23:15",
+            "description": "Applied preset: business_configurator"
+        }
+    ]
+}

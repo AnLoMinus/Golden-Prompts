@@ -1,0 +1,34 @@
+{
+  "AI Project": {
+    "project_id": "AI-",
+    "project_name": "AI Project",
+    "project_owner": "",
+    "project_description": "An artificial intelligence project",
+    "project_status": ["Not Started", "In Progress", "Testing", "Completed"],
+    "languages": ["Python", "JavaScript"],
+    "technologies": ["TensorFlow", "PyTorch", "React"],
+    "task_statuses": ["Not Started", "In Progress", "Review", "Completed"]
+  },
+  "Web Development": {
+    "project_id": "WEB-",
+    "project_name": "Web Development Project",
+    "project_owner": "",
+    "project_description": "A web development project",
+    "project_status": [
+      "Planning",
+      "Development",
+      "Testing",
+      "Deployment",
+      "Maintenance"
+    ],
+    "languages": ["HTML", "CSS", "JavaScript"],
+    "technologies": ["React", "Node.js", "Express"],
+    "task_statuses": [
+      "Backlog",
+      "In Progress",
+      "Code Review",
+      "Testing",
+      "Done"
+    ]
+  }
+}

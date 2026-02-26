@@ -1,0 +1,148 @@
+{
+  "business_configurator": {
+    "project_id": "BIZ-",
+    "project_name": "Business Project",
+    "project_owner": "",
+    "project_description": "A business-oriented project",
+    "project_status": ["Planning", "Implementation", "Review", "Completed"],
+    "languages": ["English", "Hebrew", "Arabic"],
+    "technologies": ["CRM", "ERP", "Business Intelligence"],
+    "task_statuses": ["Not Started", "In Progress", "Under Review", "Completed"]
+  },
+  "tech_configurator": {
+    "project_id": "TECH-",
+    "project_name": "Technology Project",
+    "project_owner": "",
+    "project_description": "A technology-focused project",
+    "project_status": ["Research", "Development", "Testing", "Deployment"],
+    "languages": ["Python", "JavaScript", "Java", "C++", "Go"],
+    "technologies": [
+      "Web Development",
+      "Mobile Development",
+      "Machine Learning",
+      "Cloud Computing",
+      "Blockchain",
+      "IoT",
+      "Cybersecurity"
+    ],
+    "task_statuses": [
+      "Backlog",
+      "In Progress",
+      "Code Review",
+      "Testing",
+      "Done"
+    ]
+  },
+  "general_configurator": {
+    "project_id": "PROJ-",
+    "project_name": "General Project",
+    "project_owner": "",
+    "project_description": "A general-purpose project",
+    "project_status": ["Not Started", "In Progress", "On Hold", "Completed"],
+    "languages": [],
+    "technologies": [],
+    "task_statuses": ["Not Started", "In Progress", "Completed"]
+  },
+  "software_development": {
+    "project_id": "SW-",
+    "project_name": "Software Development Project",
+    "project_owner": "",
+    "project_description": "A comprehensive software development project",
+    "project_status": [
+      "Planning",
+      "Development",
+      "Testing",
+      "Deployment",
+      "Maintenance"
+    ],
+    "languages": ["Python", "JavaScript", "Java", "C#", "TypeScript"],
+    "technologies": [
+      "React",
+      "Node.js",
+      "Django",
+      "Docker",
+      "Kubernetes",
+      "AWS"
+    ],
+    "task_statuses": ["Backlog", "In Progress", "Code Review", "QA", "Done"]
+  },
+  "marketing_campaign": {
+    "project_id": "MKT-",
+    "project_name": "Marketing Campaign",
+    "project_owner": "",
+    "project_description": "A strategic marketing campaign project",
+    "project_status": [
+      "Ideation",
+      "Planning",
+      "Execution",
+      "Analysis",
+      "Reporting"
+    ],
+    "languages": ["English", "Spanish", "French", "German", "Chinese"],
+    "technologies": [
+      "Social Media",
+      "Email Marketing",
+      "SEO",
+      "Content Management",
+      "Analytics"
+    ],
+    "task_statuses": ["To Do", "In Progress", "Review", "Approved", "Completed"]
+  },
+  "research_project": {
+    "project_id": "RES-",
+    "project_name": "Scientific Research Project",
+    "project_owner": "",
+    "project_description": "An in-depth scientific research project",
+    "project_status": [
+      "Literature Review",
+      "Hypothesis Formation",
+      "Experimentation",
+      "Data Analysis",
+      "Publication"
+    ],
+    "languages": ["English", "Latin", "Greek"],
+    "technologies": [
+      "SPSS",
+      "MATLAB",
+      "R",
+      "LaTeX",
+      "Microscopy",
+      "Spectroscopy"
+    ],
+    "task_statuses": [
+      "Proposed",
+      "In Progress",
+      "Peer Review",
+      "Revision",
+      "Completed"
+    ]
+  },
+  "event_planning": {
+    "project_id": "EVT-",
+    "project_name": "Event Planning Project",
+    "project_owner": "",
+    "project_description": "A comprehensive event planning and management project",
+    "project_status": [
+      "Conceptualization",
+      "Planning",
+      "Coordination",
+      "Execution",
+      "Post-Event Review"
+    ],
+    "languages": ["English", "Local Language"],
+    "technologies": [
+      "Event Management Software",
+      "Ticketing Systems",
+      "CRM",
+      "Budgeting Tools",
+      "Social Media"
+    ],
+    "task_statuses": [
+      "Not Started",
+      "In Progress",
+      "Awaiting Approval",
+      "Confirmed",
+      "Completed"
+    ]
+  }
+}

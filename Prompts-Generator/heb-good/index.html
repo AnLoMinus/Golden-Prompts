@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>טופס יצירת בקשה</title>
+    <link rel="stylesheet" href="../../../0-css/Fresh.css">
+    <style>
+        input {
+            width: 50%;
+        }
+
+        /* Form Container */
+        form {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2.0rem;
+            background: hsl(0, 0%, 0%, 50%);
+            border-radius: 16px;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+            color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Header */
+        h2 {
+            text-align: center;
+            color: #00bcd4;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            font-weight: 700;
+        }
+
+        h2::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 5px;
+            background: #00bcd4;
+            margin: 0.75rem auto;
+            border-radius: 3px;
+        }
+
+        /* Form Group */
+        .form-group {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #444;
+        }
+
+        /* Labels */
+        label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+            color: #e8e8e8;
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        /* Focused Label */
+        label::before {
+            content: " ";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            height: 3px;
+            width: 0;
+            background: #00bcd4;
+            transition: width 0.3s ease;
+        }
+
+        input:focus~label::before,
+        select:focus~label::before {
+            width: 100%;
+        }
+
+        /* Input Fields */
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #555;
+            border-radius: 8px;
+            background: #333;
+            color: #f5f5f5;
+            font-size: 1.1rem;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #00bcd4;
+            background: #444;
+            outline: none;
+        }
+
+        /* Helper Text */
+        small.form-help {
+            display: block;
+            margin-top: 0.75rem;
+            font-size: 0.95rem;
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+
+        /* Submit Button */
+        .submit-button {
+            padding: 0.875rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            background: #00bcd4;
+            color: #fff;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .submit-button:hover {
+            background: #00acc1;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .submit-button:active {
+            background: #0097a7;
+            transform: translateY(0);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>טופס יצירת בקשה</h1>
+    <form id="requestForm" aria-labelledby="requestForm">
+        <h2 id="requestForm">טופס בקשה</h2>
+
+        <!-- content -->
+        <div class="form-group" style="padding: 0px 0px 0px 18px;">
+            <label for="context">רקע כללי:</label>
+            <input type="text" id="context" name="context" placeholder="הזן רקע כללי (אופציונלי)"
+                aria-describedby="contextHelp" aria-required="false">
+            <small id="contextHelp" class="form-help">שדה זה הוא אופציונלי. אם יש לך מידע נוסף, הכנס אותו כאן.</small>
+            <style>
+                /* Form Group */
+                .form-group {
+                    margin-bottom: 2rem;
+                    padding-bottom: 1.5rem;
+                    border-bottom: 1px solid #444;
+                    position: relative;
+                }
+
+                /* Labels */
+                .form-group label {
+                    display: block;
+                    margin-bottom: 0.75rem;
+                    font-size: 1.2rem;
+                    color: #e8e8e8;
+                    font-weight: 600;
+                    position: relative;
+                    transition: color 0.3s ease;
+                }
+
+                /* Focused Label */
+                .form-group input:focus~label::before {
+                    width: 100%;
+                }
+
+                /* Input Fields */
+                .form-group input[type="text"] {
+                    width: 100%;
+                    padding: 1rem;
+                    border: 1px solid #555;
+                    border-radius: 8px;
+                    background: #333;
+                    color: #f5f5f5;
+                    font-size: 1.1rem;
+                    transition: background 0.3s ease, border-color 0.3s ease;
+                    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+                }
+
+                .form-group input[type="text"]:focus {
+                    border-color: #00bcd4;
+                    background: #444;
+                    outline: none;
+                    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+                }
+
+                /* Helper Text */
+                .form-group .form-help {
+                    display: block;
+                    margin-top: 0.75rem;
+                    font-size: 0.95rem;
+                    color: #ccc;
+                    transition: color 0.3s ease;
+                }
+
+                /* Focused Helper Text */
+                .form-group input:focus~.form-help {
+                    color: #00bcd4;
+                }
+            </style>
+        </div>
+
+        <!-- role -->
+        <div class="form-group">
+            <label for="role">תפקיד:</label>
+            <select id="role" name="role" required aria-required="true">
+                <option value="" disabled selected>בחר תפקיד</option>
+
+                <!-- Educational Roles -->
+                <optgroup label="תפקידים חינוכיים">
+                    <option value="Teacher">מורה</option>
+                    <option value="Language Tutor">מורה לשפות</option>
+                    <option value="Educational Coordinator">רכז חינוכי</option>
+                    <option value="Curriculum Developer">מפתח תכנית לימודים</option>
+                    <option value="Training Specialist">מומחה הדרכה</option>
+                    <option value="Educational Psychologist">פסיכולוג חינוכי</option>
+                </optgroup>
+
+                <!-- Project and Business Management -->
+                <optgroup label="ניהול פרויקטים ועסקים">
+                    <option value="Project Manager">מנהל פרויקטים</option>
+                    <option value="Business Analyst">אנליסט עסקי</option>
+                    <option value="Product Manager">מנהל מוצר</option>
+                    <option value="Operations Manager">מנהל תפעול</option>
+                    <option value="Account Manager">מנהל לקוחות</option>
+                    <option value="Supply Chain Manager">מנהל שרשרת אספקה</option>
+                    <option value="Change Manager">מנהל שינויים</option>
+                </optgroup>
+
+                <!-- Consulting and Support -->
+                <optgroup label="ייעוץ ותמיכה">
+                    <option value="Consultant">יועץ</option>
+                    <option value="Customer Support Agent">נציג שירות לקוחות</option>
+                    <option value="Technical Support Specialist">מומחה תמיכה טכנית</option>
+                    <option value="Sales Consultant">יועץ מכירות</option>
+                    <option value="HR Specialist">מומחה משאבי אנוש</option>
+                    <option value="Compliance Officer">קצין ציות</option>
+                    <option value="Business Consultant">יועץ עסקי</option>
+                </optgroup>
+
+                <!-- Creative and Writing -->
+                <optgroup label="יצירה וכתיבה">
+                    <option value="Creative Writer">כותב יצירתי</option>
+                    <option value="Content Creator">יוצר תוכן</option>
+                    <option value="Editor">עורך</option>
+                    <option value="Copywriter">כותב תוכן שיווקי</option>
+                    <option value="Technical Writer">כותב טכני</option>
+                    <option value="Scriptwriter">תסריטאי</option>
+                    <option value="Journalist">עיתונאי</option>
+                </optgroup>
+
+                <!-- Research and Data Analysis -->
+                <optgroup label="מחקר וניתוח נתונים">
+                    <option value="Research Assistant">עוזר מחקר</option>
+                    <option value="Data Scientist">מדען נתונים</option>
+                    <option value="Data Analyst">אנליסט נתונים</option>
+                    <option value="Market Research Analyst">אנליסט מחקר שוק</option>
+                    <option value="Statistical Analyst">אנליסט סטטיסטי</option>
+                    <option value="Quantitative Researcher">חוקר כמותי</option>
+                    <option value="Research Coordinator">רכז מחקר</option>
+                </optgroup>
+
+                <!-- Design and Development -->
+                <optgroup label="עיצוב ופיתוח">
+                    <option value="Software Developer">מפתח תוכנה</option>
+                    <option value="UX Designer">מעצב UX</option>
+                    <option value="UI Designer">מעצב UI</option>
+                    <option value="Web Developer">מפתח אתרים</option>
+                    <option value="Graphic Designer">מעצב גרפי</option>
+                    <option value="Front-End Developer">מפתח Front-End</option>
+                    <option value="Back-End Developer">מפתח Back-End</option>
+                    <option value="Game Developer">מפתח משחקים</option>
+                    <option value="Mobile App Developer">מפתח אפליקציות ניידות</option>
+                </optgroup>
+
+                <!-- Marketing and Sales -->
+                <optgroup label="שיווק ומכירות">
+                    <option value="Marketing Manager">מנהל שיווק</option>
+                    <option value="Sales Manager">מנהל מכירות</option>
+                    <option value="Digital Marketing Specialist">מומחה שיווק דיגיטלי</option>
+                    <option value="SEO Specialist">מומחה SEO</option>
+                    <option value="Content Marketer">משווק תוכן</option>
+                    <option value="Brand Manager">מנהל מותג</option>
+                    <option value="Advertising Specialist">מומחה פרסום</option>
+                </optgroup>
+
+                <!-- Healthcare and Medical -->
+                <optgroup label="בריאות ורפואה">
+                    <option value="Healthcare Professional">מומחה בתחום הבריאות</option>
+                    <option value="Medical Researcher">חוקר רפואי</option>
+                    <option value="Nurse">אחות</option>
+                    <option value="Doctor">רופא</option>
+                    <option value="Pharmacist">רוקח</option>
+                    <option value="Medical Technician">טכנאי רפואי</option>
+                </optgroup>
+
+                <!-- Other Roles -->
+                <optgroup label="תפקידים נוספים">
+                    <option value="Event Coordinator">רכז אירועים</option>
+                    <option value="Social Media Manager">מנהל רשתות חברתיות</option>
+                    <option value="Legal Advisor">יועץ משפטי</option>
+                    <option value="Financial Analyst">אנליסט פיננסי</option>
+                    <option value="Compliance Officer">קצין ציות</option>
+                    <option value="Real Estate Agent">סוכן נדל"ן</option>
+                    <option value="Travel Consultant">יועץ נסיעות</option>
+                </optgroup>
+            </select>
+            <small class="form-help">אנא בחר את התפקיד שלך מתוך הרשימה.</small>
+        </div>
+
+        <!-- task -->
+        <div class="form-group">
+            <label for="task">משימה:</label>
+            <select id="task" name="task" required aria-required="true">
+                <option value="" disabled selected>בחר משימה</option>
+
+                <!-- Communication Tasks -->
+                <optgroup label="תקשורת">
+                    <option value="Draft an email">לכתוב דוא"ל</option>
+                    <option value="Edit a document">לערוך מסמך</option>
+                    <option value="Design a presentation">לעצב מצגת</option>
+                    <option value="Compose a newsletter">לכתוב עלון חדשות</option>
+                    <option value="Write a script">לכתוב תסריט</option>
+                    <option value="Create a press release">ליצור הודעה לעיתונות</option>
+                    <option value="Draft a proposal">לכתוב הצעה</option>
+                </optgroup>
+
+                <!-- Writing and Content Creation -->
+                <optgroup label="כתיבה ויצירת תוכן">
+                    <option value="Write an article">לכתוב מאמר</option>
+                    <option value="Create a summary">ליצור סיכום</option>
+                    <option value="Generate a report">ליצור דוח</option>
+                    <option value="Create a list">ליצור רשימה</option>
+                    <option value="Provide recommendations">לספק המלצות</option>
+                    <option value="Develop a blog post">לכתוב פוסט לבלוג</option>
+                    <option value="Create a white paper">ליצור מסמך לבן</option>
+                    <option value="Write an eBook">לכתוב ספר אלקטרוני</option>
+                    <option value="Create content for social media">ליצור תוכן לרשתות חברתיות</option>
+                </optgroup>
+
+                <!-- Planning and Research -->
+                <optgroup label="תכנון ומחקר">
+                    <option value="Develop a plan">לפתח תוכנית</option>
+                    <option value="Conduct a survey">לערוך סקר</option>
+                    <option value="Plan a workshop">לתכנן סדנה</option>
+                    <option value="Answer a question">לענות על שאלה</option>
+                    <option value="Analyze data">לנתח נתונים</option>
+                    <option value="Conduct a market analysis">לערוך ניתוח שוק</option>
+                    <option value="Research industry trends">לחקור מגמות בתעשייה</option>
+                    <option value="Create a strategic roadmap">ליצור מפת דרכים אסטרטגית</option>
+                </optgroup>
+
+                <!-- Creative and Design Tasks -->
+                <optgroup label="משימות יצירתיות ועיצוב">
+                    <option value="Design a logo">לעצב לוגו</option>
+                    <option value="Create marketing materials">ליצור חומרי שיווק</option>
+                    <option value="Develop a brand identity">לפתח זהות מותג</option>
+                    <option value="Create digital art">ליצור אמנות דיגיטלית</option>
+                    <option value="Design website graphics">לעצב גרפיקה לאתר</option>
+                    <option value="Create an infographic">ליצור אינפוגרפיקה</option>
+                    <option value="Design packaging">לעצב אריזות</option>
+                </optgroup>
+
+                <!-- Technical and Development -->
+                <optgroup label="טכני ופיתוח">
+                    <option value="Write code">לכתוב קוד</option>
+                    <option value="Develop a software application">לפיתוח אפליקציה תוכנה</option>
+                    <option value="Design a database schema">לעצב סכמת מסד נתונים</option>
+                    <option value="Test software functionality">לבצע בדיקות פונקציית תוכנה</option>
+                    <option value="Develop a website">לפיתוח אתר אינטרנט</option>
+                    <option value="Implement a feature">להטמיע תכונה</option>
+                    <option value="Create API documentation">ליצור תיעוד API</option>
+                </optgroup>
+
+                <!-- Event and Meeting Planning -->
+                <optgroup label="תכנון אירועים ופגישות">
+                    <option value="Organize a conference">לארגן כנס</option>
+                    <option value="Plan a corporate event">לתכנן אירוע עסקי</option>
+                    <option value="Coordinate a team meeting">לתאם פגישת צוות</option>
+                    <option value="Plan a networking event">לתכנן אירוע נטוורקינג</option>
+                </optgroup>
+
+                <!-- Training and Development -->
+                <optgroup label="הדרכה ופיתוח">
+                    <option value="Create training materials">ליצור חומרי הדרכה</option>
+                    <option value="Develop an online course">לפתח קורס מקוון</option>
+                    <option value="Conduct a training session">לקיים סדנת הדרכה</option>
+                    <option value="Write a training manual">לכתוב מדריך הדרכה</option>
+                </optgroup>
+            </select>
+            <small class="form-help">אנא בחר את המשימה שברצונך לבצע.</small>
+        </div>
+
+        <!-- constraints -->
+        <div class="form-group">
+            <label for="constraints">מגבלות:</label>
+            <select id="constraints" name="constraints" multiple>
+                <!-- General Constraints -->
+                <optgroup label="מגבלות כלליות">
+                    <option value="Avoid technical jargon">להימנע ממונחים טכניים</option>
+                    <option value="Keep responses under 200 words">לשמור על תשובות מתחת ל-200 מילים</option>
+                    <option value="Do not include sensitive information">לא לכלול מידע רגיש</option>
+                    <option value="Use a professional tone">להשתמש בטון מקצועי</option>
+                    <option value="Provide only factual information">לספק מידע עובדתי בלבד</option>
+                    <option value="Use inclusive language">להשתמש בשפה מכילה</option>
+                    <option value="Maintain confidentiality">לשמור על סודיות</option>
+                    <option value="Avoid redundancy">להימנע מחזרות</option>
+                </optgroup>
+
+                <!-- Source and Reference Constraints -->
+                <optgroup label="מגבלות על מקורות וציטוטים">
+                    <option value="Do not reference external sources">לא להתייחס למקורות חיצוניים</option>
+                    <option value="Include citations">להוסיף ציטוטים</option>
+                    <option value="Provide examples">לספק דוגמאות</option>
+                    <option value="Use only peer-reviewed sources">להשתמש רק במקורות שהוערכו על ידי עמיתים</option>
+                    <option value="Avoid proprietary information">להימנע מידע פרטי</option>
+                    <option value="Cite original authors">לציין את המחברים המקוריים</option>
+                    <option value="Verify information before inclusion">לאמת מידע לפני הכללה</option>
+                </optgroup>
+
+                <!-- Accessibility and Alternatives Constraints -->
+                <optgroup label="נגישות ופתרונות חלופיים">
+                    <option value="Ensure accessibility">להבטיח נגישות</option>
+                    <option value="Offer alternative solutions">להציע פתרונות חלופיים</option>
+                    <option value="Provide translations">לספק תרגומים</option>
+                    <option value="Consider different perspectives">להתחשב בפרספקטיבות שונות</option>
+                    <option value="Include accessibility features">להוסיף תכונות נגישות</option>
+                    <option value="Ensure readability">להבטיח קריאות</option>
+                    <option value="Support multiple languages">לתמוך בשפות רבות</option>
+                </optgroup>
+
+                <!-- Formatting Constraints -->
+                <optgroup label="מגבלות על עיצוב ופורמט">
+                    <option value="Use clear headings and subheadings">להשתמש בכותרות וכותרות משנה ברורות</option>
+                    <option value="Avoid long paragraphs">להימנע מפסקאות ארוכות</option>
+                    <option value="Use bullet points for lists">להשתמש בנקודות עבור רשימות</option>
+                    <option value="Highlight key points">להדגיש נקודות עיקריות</option>
+                    <option value="Maintain a consistent format">לשמור על פורמט עקבי</option>
+                    <option value="Use proper grammar and punctuation">להשתמש בדקדוק נכון ופיסוק</option>
+                    <option value="Adhere to brand guidelines">לעמוד בקווים המנחים של המותג</option>
+                    <option value="Ensure compatibility with text readers">להבטיח תאימות עם קוראי טקסט</option>
+                </optgroup>
+
+                <!-- Technical Constraints -->
+                <optgroup label="מגבלות טכניות">
+                    <option value="Ensure compatibility with various devices">להבטיח תאימות עם מכשירים שונים</option>
+                    <option value="Optimize for fast loading times">לשפר את מהירות הטעינה</option>
+                    <option value="Avoid large file sizes">להימנע מגודל קובץ גדול</option>
+                    <option value="Test on multiple browsers">לבדוק בכמה דפדפנים</option>
+                    <option value="Use web-safe fonts">להשתמש בגופנים תואמים לרשת</option>
+                    <option value="Implement responsive design">ליישם עיצוב רספונסיבי</option>
+                    <option value="Ensure secure data handling">להבטיח טיפול מאובטח בנתונים</option>
+                </optgroup>
+
+                <!-- Ethical and Legal Constraints -->
+                <optgroup label="מגבלות אתיות וחוקיות">
+                    <option value="Comply with data protection regulations">להקפיד על תקנות הגנת נתונים</option>
+                    <option value="Respect intellectual property rights">לכבד זכויות יוצרים</option>
+                    <option value="Avoid plagiarism">להימנע מגניבת דעת</option>
+                    <option value="Ensure ethical sourcing">להבטיח מקור אתי</option>
+                    <option value="Follow legal guidelines">לפעול לפי הנחיות חוקיות</option>
+                    <option value="Obtain necessary permissions">לקבל אישורים נדרשים</option>
+                </optgroup>
+            </select>
+            <small class="form-help">בחר מגבלות שחשוב לך לשמור עליהן.</small>
+        </div>
+
+        <!-- format -->
+        <div class="form-group">
+            <label for="format">פורמט:</label>
+            <select id="format" name="format" aria-required="true" aria-describedby="formatHelp" required>
+                <option value="" disabled selected>בחר פורמט</option>
+
+                <!-- Basic Formats -->
+                <optgroup label="פורמטים בסיסיים">
+                    <option value="Bullet points">נקודות</option>
+                    <option value="Numbered list">רשימה ממוספרת</option>
+                    <option value="Paragraph">פסקה</option>
+                    <option value="Dialogue">דיאלוג</option>
+                    <option value="Checklist">רשימת בדיקה</option>
+                </optgroup>
+
+                <!-- Instructions and Guides -->
+                <optgroup label="הוראות ומדריכים">
+                    <option value="Step-by-step instructions">הוראות שלב-שלב</option>
+                    <option value="Training Manual">מדריך הכשרה</option>
+                    <option value="User Guide">מדריך למשתמש</option>
+                    <option value="Quick Reference Guide">מדריך התייחסות מהירה</option>
+                </optgroup>
+
+                <!-- Visual and Graphical Representations -->
+                <optgroup label="ייצוגים גרפיים וויזואליים">
+                    <option value="Table">טבלה</option>
+                    <option value="Code snippet">קטע קוד</option>
+                    <option value="Infographic">אינפוגרפיקה</option>
+                    <option value="Flowchart">תרשים זרימה</option>
+                    <option value="Annotated Diagram">תרשים מסומן</option>
+                    <option value="Mind Map">מפת חשיבה</option>
+                    <option value="Gantt Chart">תרשים גנט</option>
+                    <option value="Schematic Diagram">תרשים סכמטי</option>
+                    <option value="Heat Map">מפת חום</option>
+                </optgroup>
+
+                <!-- Analytical and Strategic Documents -->
+                <optgroup label="מסמכים אנליטיים ואסטרטגיים">
+                    <option value="Case Study">מחקר מקרה</option>
+                    <option value="SWOT Analysis">ניתוח SWOT</option>
+                    <option value="Strategy Map">מפת אסטרטגיה</option>
+                    <option value="Customer Journey Map">מפת מסע לקוח</option>
+                    <option value="Competitor Analysis">ניתוח מתחרים</option>
+                </optgroup>
+
+                <!-- Proposals and Reports -->
+                <optgroup label="הצעות ודוחות">
+                    <option value="Proposal Document">מסמך הצעה</option>
+                    <option value="Research Paper">מאמר מחקר</option>
+                    <option value="Sales Report">דו"ח מכירות</option>
+                    <option value="Expense Report">דו"ח הוצאות</option>
+                    <option value="Marketing Plan">תוכנית שיווק</option>
+                    <option value="Project Status Report">דו"ח סטטוס פרויקט</option>
+                    <option value="Annual Report">דו"ח שנתי</option>
+                </optgroup>
+
+                <!-- Legal and Administrative -->
+                <optgroup label="מסמכים משפטיים ומנהליים">
+                    <option value="Legal Agreement">הסכם משפטי</option>
+                    <option value="Meeting Minutes">פרוטוקול ישיבה</option>
+                    <option value="Press Release">הודעת לעיתונות</option>
+                    <option value="Policy Document">מסמך מדיניות</option>
+                    <option value="Contract Template">תבנית הסכם</option>
+                </optgroup>
+
+                <!-- Miscellaneous -->
+                <optgroup label="שונות">
+                    <option value="Event Schedule">לוח זמנים לאירוע</option>
+                    <option value="Product Specification">מפרט מוצר</option>
+                    <option value="Survey Questionnaire">שאלון סקר</option>
+                    <option value="Project Plan">תוכנית פרויקט</option>
+                    <option value="Budget Plan">תוכנית תקציב</option>
+                    <option value="Meeting Agenda">סדר יום לפגישה</option>
+                </optgroup>
+            </select>
+            <small id="formatHelp" class="form-help">בחר את הפורמט המועדף עליך. ודא שבחרת אפשרות לפני שליחת
+                הטופס.</small>
+        </div>
+
+        <!-- Style -->
+        <div class="form-group">
+            <label for="style">סגנון:</label>
+            <select id="style" name="style" aria-required="true" aria-describedby="styleHelp" required>
+                <option value="" disabled selected>בחר סגנון</option>
+
+                <!-- Formal Styles -->
+                <optgroup label="סגנונות פורמליים">
+                    <option value="Formal">פורמלי</option>
+                    <option value="Technical">טכני</option>
+                    <option value="Detailed">מפורט</option>
+                    <option value="Neutral">נייטרלי</option>
+                    <option value="Critical">ביקורתי</option>
+                </optgroup>
+
+                <!-- Casual and Friendly Styles -->
+                <optgroup label="סגנונות לא פורמליים">
+                    <option value="Informal">לא פורמלי</option>
+                    <option value="Friendly">ידידותי</option>
+                    <option value="Humorous">מצחיק</option>
+                    <option value="Inspirational">מניע</option>
+                    <option value="Narrative">נרטיבי</option>
+                </optgroup>
+
+                <!-- Persuasive and Concise Styles -->
+                <optgroup label="סגנונות משכנעים ותמציתיים">
+                    <option value="Persuasive">משכנע</option>
+                    <option value="Concise">תמציתי</option>
+                    <option value="Brief">תמציתי מאוד</option>
+                    <option value="Abstract">אבחנה</option>
+                    <option value="Summary">סיכום</option>
+                </optgroup>
+
+                <!-- Creative and Diverse Styles -->
+                <optgroup label="סגנונות יצירתיים ומגוונים">
+                    <option value="Creative">יצירתי</option>
+                    <option value="Experimental">ניסי</option>
+                    <option value="Artistic">אומנותי</option>
+                    <option value="Innovative">חדשני</option>
+                    <option value="Playful">משעשע</option>
+                </optgroup>
+
+                <!-- Specialized Styles -->
+                <optgroup label="סגנונות מתמחים">
+                    <option value="Marketing">שיווקי</option>
+                    <option value="Editorial">עורכי</option>
+                    <option value="Academic">אקדמי</option>
+                    <option value="Report">דיווח</option>
+                    <option value="Business">עסקי</option>
+                </optgroup>
+            </select>
+            <small id="styleHelp" class="form-help">בחר את הסגנון המתאים לך. ודא שבחרת אפשרות לפני שליחת הטופס.</small>
+        </div>
+
+        <!-- length -->
+        <div class="form-group">
+            <label for="length">אורך:</label>
+            <select id="length" name="length">
+                <option value="" disabled selected>בחר אורך</option>
+
+                <!-- Short Length -->
+                <optgroup label="קצר">
+                    <option value="Micro (20-30 words)">מיקרו (20-30 מילים)</option>
+                    <option value="Brief (up to 50 words)">תמציתי (עד 50 מילים)</option>
+                    <option value="Short (50-100 words)">קצר (50-100 מילים)</option>
+                    <option value="Short-form (up to 70 words)">פורמט קצר (עד 70 מילים)</option>
+                    <option value="Snippet (30-60 words)">קטע קצר (30-60 מילים)</option>
+                </optgroup>
+
+                <!-- Medium Length -->
+                <optgroup label="בינוני">
+                    <option value="Medium (100-250 words)">בינוני (100-250 מילים)</option>
+                    <option value="Intermediate (250-500 words)">בינוני-ארוך (250-500 מילים)</option>
+                    <option value="Extended (500-1000 words)">מורחב (500-1000 מילים)</option>
+                    <option value="Standard (150-300 words)">סטנדרטי (150-300 מילים)</option>
+                </optgroup>
+
+                <!-- Long Length -->
+                <optgroup label="ארוך">
+                    <option value="Long (250-500 words)">ארוך (250-500 מילים)</option>
+                    <option value="Detailed (500-750 words)">מפורט (500-750 מילים)</option>
+                    <option value="Comprehensive (750-1000 words)">מעמיק (750-1000 מילים)</option>
+                    <option value="Extensive (1000-1500 words)">נרחב (1000-1500 מילים)</option>
+                </optgroup>
+
+                <!-- Very Long Length -->
+                <optgroup label="מאוד ארוך">
+                    <option value="Very long (500+ words)">מאוד ארוך (500+ מילים)</option>
+                    <option value="Epic (1500+ words)">אפיק (1500+ מילים)</option>
+                    <option value="Grand (2000+ words)">גדול (2000+ מילים)</option>
+                    <option value="Monograph (3000+ words)">מונוגרפיה (3000+ מילים)</option>
+                </optgroup>
+
+                <!-- Custom Length -->
+                <optgroup label="אורך מותאם אישית">
+                    <option value="Custom">מותאם אישית</option>
+                    <option value="Flexible">גמיש</option>
+                    <option value="Variable">משתנה</option>
+                </optgroup>
+            </select>
+            <small class="form-help">בחר את האורך המועדף עליך.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="examples">דוגמאות:</label>
+            <select id="examples" name="examples" multiple aria-required="true" aria-describedby="examplesHelp">
+                <option value="" disabled selected>בחר דוגמאות</option>
+
+                <!-- Communication Examples -->
+                <optgroup label="תקשורת">
+                    <option value="Example 1: Draft an apology email to a client.">דוגמה 1: לכתוב דוא"ל התנצלות ללקוח
+                    </option>
+                    <option value="Example 2: Write a follow-up email after a meeting.">דוגמה 2: לכתוב דוא"ל מעקב לאחר
+                        פגישה</option>
+                    <option value="Example 3: Create a proposal for a new project.">דוגמה 3: ליצור הצעה לפרויקט חדש
+                    </option>
+                    <option value="Example 4: Prepare a presentation for a conference.">דוגמה 4: להכין מצגת לכנס
+                    </option>
+                </optgroup>
+
+                <!-- Planning and Strategy -->
+                <optgroup label="תכנון ואסטרטגיה">
+                    <option value="Example 5: Outline a weekly workout plan.">דוגמה 5: לתכנן תוכנית אימונים שבועית
+                    </option>
+                    <option value="Example 6: Develop a marketing strategy for a new product.">דוגמה 6: לפתח אסטרטגיית
+                        שיווק למוצר חדש</option>
+                    <option value="Example 7: Create a business plan for a startup.">דוגמה 7: ליצור תוכנית עסקית
+                        לסטארט-אפ</option>
+                    <option value="Example 8: Plan a team-building activity.">דוגמה 8: לתכנן פעילות גיבוש צוות</option>
+                </optgroup>
+
+                <!-- Analysis and Reporting -->
+                <optgroup label="אנליזה ודיווח">
+                    <option value="Example 9: Create a summary of a scientific article.">דוגמה 9: ליצור סיכום של מאמר
+                        מדעי</option>
+                    <option value="Example 10: Write a case study on a successful marketing campaign.">דוגמה 10: לכתוב
+                        מחקר מקרה על קמפיין שיווקי מצליח</option>
+                    <option value="Example 11: Generate a list of potential blog topics.">דוגמה 11: ליצור רשימה של
+                        נושאים פוטנציאליים לבלוג</option>
+                    <option value="Example 12: Design a survey to gather customer feedback.">דוגמה 12: לעצב סקר לאיסוף
+                        משוב מלקוחות</option>
+                </optgroup>
+
+                <!-- Documentation and Content Creation -->
+                <optgroup label="תיעוד ויצירת תוכן">
+                    <option value="Example 13: Draft a user manual for a software application.">דוגמה 13: לכתוב מדריך
+                        למשתמש לאפליקציה תוכנה</option>
+                    <option value="Example 14: Create a list of FAQs for a website.">דוגמה 14: ליצור רשימה של שאלות
+                        נפוצות לאתר אינטרנט</option>
+                    <option value="Example 15: Prepare an infographic summarizing key findings.">דוגמה 15: להכין
+                        אינפוגרפיקה המסכמת ממצאים עיקריים</option>
+                    <option value="Example 16: Write a blog post on industry trends.">דוגמה 16: לכתוב פוסט בבלוג על
+                        מגמות בתעשייה</option>
+                </optgroup>
+            </select>
+            <small id="examplesHelp" class="form-help">בחר את הדוגמאות שיכולות לעזור לך בתהליך.</small>
+        </div>
+
+        <button type="submit" class="submit-button">שלח בקשה</button>
+    </form>
+
+
+
+    <h2>תוצאה:</h2>
+    <div class="result-container">
+        <style>
+            .result-container {
+                margin-top: 20px;
+            }
+
+            textarea {
+                width: 100%;
+                max-width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                font-family: Arial, sans-serif;
+                font-size: 14px;
+            }
+
+            .button-group {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            .button-group button {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                padding: 10px 20px;
+                font-size: 14px;
+                cursor: pointer;
+                transition: background-color 0.3s, transform 0.2s;
+            }
+
+            .button-group button:hover {
+                background-color: #0056b3;
+            }
+
+            .button-group button:active {
+                transform: scale(0.98);
+            }
+
+            .form-help {
+                display: block;
+                margin-top: 5px;
+                color: #6c757d;
+                font-size: 12px;
+                font-family: Arial, sans-serif;
+            }
+
+            .result-container {
+                margin-top: 20px;
+            }
+
+            textarea {
+                width: 100%;
+                max-width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border - box;
+                font-family: Arial, sans - serif;
+                font-size: 14px;
+            }
+
+            .button-group {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            .button-group button {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                padding: 10px 20px;
+                font-size: 14px;
+                cursor: pointer;
+                transition: background - color 0.3s, transform 0.2s;
+            }
+
+            .button-group button:hover {
+                background-color: #0056b3;
+            }
+
+            .button-group button:active {
+                transform: scale(0.98);
+            }
+
+            .form-help {
+                display: block;
+                margin-top: 5px;
+                color: #6c757d;
+                font-size: 12px;
+                font-family: Arial, sans - serif;
+            }
+        </style>
+
+        <textarea id="result" rows="10" cols="50" readonly aria-labelledby="resultLabel"
+            placeholder="הטקסט יופיע כאן לאחר ביצוע הפעולה."></textarea><br>
+        <div class="button-group">
+            <button id="copyButton" aria-describedby="copyHelp">העתק תוצאה</button>
+            <button id="saveButton" aria-describedby="saveHelp">שמור תוצאה</button>
+            <button id="clearButton" aria-describedby="clearHelp">נקה תוצאה</button>
+            <button id="printButton" aria-describedby="printHelp">הדפס תוצאה</button>
+            <button id="emailButton" aria-describedby="emailHelp">שלח בדוא"ל</button>
+            <button id="downloadButton" aria-describedby="downloadHelp">הורד קובץ</button>
+            <button id="shareButton" aria-describedby="shareHelp">שתף</button>
+            <button id="translateButton" aria-describedby="translateHelp">תרגם</button>
+            <button id="highlightButton" aria-describedby="highlightHelp">סמן טקסט</button>
+        </div>
+        <small id="copyHelp" class="form-help">לחץ על כפתור זה כדי להעתיק את התוצאה ללוח. השתמש בקיצורי דרך של המקלדת
+            (Ctrl+C) כדי להעתיק את הטקסט.</small>
+        <small id="saveHelp" class="form-help">לחץ על כפתור זה כדי לשמור את התוצאה כקובץ טקסט במחשב שלך.</small>
+        <small id="clearHelp" class="form-help">לחץ על כפתור זה כדי לנקות את התוצאה מהטקסטארה.</small>
+        <small id="printHelp" class="form-help">לחץ על כפתור זה כדי להדפיס את התוצאה.</small>
+        <small id="emailHelp" class="form-help">לחץ על כפתור זה כדי לשלוח את התוצאה בדוא"ל.</small>
+        <small id="downloadHelp" class="form-help">לחץ על כפתור זה כדי להוריד את התוצאה כקובץ טקסט.</small>
+        <small id="shareHelp" class="form-help">לחץ על כפתור זה כדי לשתף את התוצאה ברשתות חברתיות או באפליקציות
+            אחרות.</small>
+        <small id="translateHelp" class="form-help">לחץ על כפתור זה כדי לתרגם את התוצאה לשפה אחרת.</small>
+        <small id="highlightHelp" class="form-help">לחץ על כפתור זה כדי לסמן טקסט מסוים בתוצאה לצורך הדגשה.</small>
+    </div>
+    <script>document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('requestForm');
+            const resultTextarea = document.getElementById('result');
+            const copyButton = document.getElementById('copyButton');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // יצירת הודעה מותאמת לפי התוכן שנבחר
+                const context = document.getElementById('context').value.trim();
+                const role = document.getElementById('role').value;
+                const task = document.getElementById('task').value;
+                const constraints = Array.from(document.getElementById('constraints').selectedOptions).map(option => option.text);
+                const format = document.getElementById('format').value;
+                const style = document.getElementById('style').value;
+                const length = document.getElementById('length').value;
+                const examples = Array.from(document.getElementById('examples').selectedOptions).map(option => option.text);
+
+                let result = `רקע כללי: ${context || "לא הוזן"}\n`;
+                result += `תפקיד: ${role}\n`;
+                result += `משימה: ${task}\n`;
+                result += `מגבלות: ${constraints.length > 0 ? constraints.join(', ') : "לא נבחרו מגבלות"}\n`;
+                result += `פורמט: ${format || "לא נבחר"}\n`;
+                result += `סגנון: ${style || "לא נבחר"}\n`;
+                result += `אורך: ${length || "לא נבחר"}\n`;
+                result += `דוגמאות: ${examples.length > 0 ? examples.join(', ') : "לא נבחרו דוגמאות"}`;
+
+                resultTextarea.value = result;
+            });
+
+            copyButton.addEventListener('click', function () {
+                resultTextarea.select();
+                document.execCommand('copy');
+                alert('התוצאה הועתקה ללוח!');
+            });
+        });
+    </script>
+    <script src="../script.js"></script>
+</body>
+
+</html>

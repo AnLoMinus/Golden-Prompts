@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Prompt Generator</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Prompt Generator</h1>
+    </header>
+    
+    <main>
+        <section id="form-section">
+            <h2>Generate a Prompt</h2>
+            <form id="prompt-form">
+                <label for="context">Context:</label>
+                <textarea id="context" rows="3" placeholder="General background information..."></textarea>
+                
+                <label for="role">Role:</label>
+                <select id="role">
+                    <option value="">Select a role...</option>
+                    <option value="Teacher">Teacher</option>
+                    <option value="Project Manager">Project Manager</option>
+                    <!-- Add other roles here -->
+                </select>
+                
+                <label for="task">Task:</label>
+                <select id="task" required>
+                    <option value="">Select a task...</option>
+                    <option value="Draft a document">Draft a document</option>
+                    <option value="Write an article">Write an article</option>
+                    <!-- Add other tasks here -->
+                </select>
+                
+                <label for="constraints">Constraints:</label>
+                <textarea id="constraints" rows="3" placeholder="Specific limitations or rules..."></textarea>
+                
+                <label for="format">Format:</label>
+                <select id="format">
+                    <option value="">Select a format...</option>
+                    <option value="Bullet points">Bullet points</option>
+                    <option value="Numbered list">Numbered list</option>
+                    <!-- Add other formats here -->
+                </select>
+                
+                <label for="style">Style:</label>
+                <select id="style">
+                    <option value="">Select a style...</option>
+                    <option value="Formal">Formal</option>
+                    <option value="Informal">Informal</option>
+                    <!-- Add other styles here -->
+                </select>
+                
+                <label for="length">Length:</label>
+                <select id="length">
+                    <option value="">Select length...</option>
+                    <option value="Short (50-100 words)">Short (50-100 words)</option>
+                    <option value="Medium (100-250 words)">Medium (100-250 words)</option>
+                    <!-- Add other lengths here -->
+                </select>
+                
+                <label for="examples">Examples:</label>
+                <textarea id="examples" rows="3" placeholder="Provide examples to guide ChatGPT..."></textarea>
+                
+                <label for="custom-parameters">Custom Parameters:</label>
+                <textarea id="custom-parameters" rows="3" placeholder="Additional parameters..."></textarea>
+                
+                <button type="submit">Generate Prompt</button>
+            </form>
+        </section>
+        
+        <section id="result-section">
+            <h2>Generated Prompt</h2>
+            <pre id="result"></pre>
+            <button id="copy-button">Copy to Clipboard</button>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>

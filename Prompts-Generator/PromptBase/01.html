@@ -1,0 +1,283 @@
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        direction: rtl;
+        text-align: right;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    #categoryFilter {
+        display: block;
+        margin: 20px auto;
+    }
+
+    .prompt-card {
+        color: white;
+        background-color: #4a4a4a50;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 16px;
+        margin: 16px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .prompt-card button {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        cursor: pointer;
+    }
+
+    .prompt-card button:hover {
+        background-color: #0056b3;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="he">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Center</title>
+    <link rel="stylesheet" href="../../../0-css/Fresh.css">
+    <!-- <link rel="stylesheet" href="../../0-css/style.css"> -->
+</head>
+
+<body>
+    <h1>מרכז ההוראות</h1>
+    <select id="categoryFilter">
+        <option value="all">הכל</option>
+        <option value="Education">חינוך</option>
+        <option value="Project Management">ניהול פרויקטים</option>
+        <option value="Consulting">ייעוץ</option>
+        <option value="Creative Writing">כתיבה יצירתית</option>
+        <option value="Research">מחקר</option>
+        <option value="Design">עיצוב</option>
+        <option value="Marketing">שיווק</option>
+        <option value="Healthcare">בריאות</option>
+    </select>
+    <div id="promptsContainer"></div>
+    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const promptsContainer = document.getElementById('promptsContainer');
+            const categoryFilter = document.getElementById('categoryFilter');
+
+            fetch('Prompts.json')
+                .then(response => response.json())
+                .then(data => {
+                    const displayPrompts = (prompts) => {
+                        promptsContainer.innerHTML = '';
+                        prompts.forEach(prompt => {
+                            const card = document.createElement('div');
+                            card.className = 'prompt-card';
+                            card.innerHTML = `
+                        <h2>${prompt.role}</h2>
+                        <p><strong>רקע:</strong> ${prompt.background}</p>
+                        <p><strong>משימה:</strong> ${prompt.task}</p>
+                        <p><strong>מגבלות:</strong> ${prompt.constraints.join(', ')}</p>
+                        <p><strong>פורמט:</strong> ${prompt.format}</p>
+                        <p><strong>סגנון:</strong> ${prompt.style}</p>
+                        <p><strong>אורך:</strong> ${prompt.length}</p>
+                        <p><strong>דוגמאות:</strong> ${prompt.examples.join(', ')}</p>
+                        <button onclick="copyToClipboard('${prompt.role} - ${prompt.task}')">העתק</button>
+                    `;
+                            promptsContainer.appendChild(card);
+                        });
+                    };
+
+                    const filterPrompts = () => {
+                        const selectedCategory = categoryFilter.value;
+                        const filteredPrompts = selectedCategory === 'all' ? data : data.filter(prompt => prompt.category === selectedCategory);
+                        displayPrompts(filteredPrompts);
+                    };
+
+                    categoryFilter.addEventListener('change', filterPrompts);
+                    filterPrompts(); // Initial display
+                });
+        });
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('ההוראה הועתקה!');
+            }, (err) => {
+                console.error('Error copying text: ', err);
+            });
+        }
+
+    </script>
+
+    <div class="form-container">
+        <style>
+            /* סגנון עבור הטופס */
+            .form-container {
+                margin: 20px auto;
+                max-width: 800px;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                background-color: #f9f9f9;
+            }
+
+            .form-container label {
+                display: block;
+                margin-bottom: 8px;
+            }
+
+            .form-container input,
+            .form-container select,
+            .form-container textarea {
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 12px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+
+            .form-container button {
+                background-color: #007BFF;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                padding: 10px 20px;
+                cursor: pointer;
+            }
+
+            .form-container button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+
+        <h2>הוסף הוראה חדשה</h2>
+
+        <form id="addPromptForm">
+            <label for="category">קטגוריה:</label>
+            <select id="category" name="category" required>
+                <option value="Education">חינוך</option>
+                <option value="Project Management">ניהול פרויקטים</option>
+                <option value="Consulting">ייעוץ</option>
+                <option value="Creative Writing">כתיבה יצירתית</option>
+                <option value="Research">מחקר</option>
+                <option value="Design">עיצוב</option>
+                <option value="Marketing">שיווק</option>
+                <option value="Healthcare">בריאות</option>
+            </select>
+
+            <label for="role">תפקיד:</label>
+            <input type="text" id="role" name="role" required>
+
+            <label for="background">רקע:</label>
+            <textarea id="background" name="background" rows="4" required></textarea>
+
+            <label for="task">משימה:</label>
+            <input type="text" id="task" name="task" required>
+
+            <label for="constraints">מגבלות:</label>
+            <input type="text" id="constraints" name="constraints" placeholder="פרט מגבלות, מופרדות בפסיק">
+
+            <label for="format">פורמט:</label>
+            <input type="text" id="format" name="format" required>
+
+            <label for="style">סגנון:</label>
+            <input type="text" id="style" name="style" required>
+
+            <label for="length">אורך:</label>
+            <input type="text" id="length" name="length" required>
+
+            <label for="examples">דוגמאות:</label>
+            <input type="text" id="examples" name="examples" placeholder="פרט דוגמאות, מופרדות בפסיק">
+
+            <button type="submit">הוסף הוראה</button>
+        </form>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const promptsContainer = document.getElementById('promptsContainer');
+                const categoryFilter = document.getElementById('categoryFilter');
+                const addPromptForm = document.getElementById('addPromptForm');
+
+                // טעינת הנתונים מקובץ JSON
+                let promptsData = [];
+
+                fetch('Prompts.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        promptsData = data;
+                        displayPrompts(promptsData);
+                    });
+
+                // הצגת ההוראות
+                const displayPrompts = (prompts) => {
+                    promptsContainer.innerHTML = '';
+                    prompts.forEach(prompt => {
+                        const card = document.createElement('div');
+                        card.className = 'prompt-card';
+                        card.innerHTML = `
+                <h2>${prompt.role}</h2>
+                <p><strong>רקע:</strong> ${prompt.background}</p>
+                <p><strong>משימה:</strong> ${prompt.task}</p>
+                <p><strong>מגבלות:</strong> ${prompt.constraints.join(', ')}</p>
+                <p><strong>פורמט:</strong> ${prompt.format}</p>
+                <p><strong>סגנון:</strong> ${prompt.style}</p>
+                <p><strong>אורך:</strong> ${prompt.length}</p>
+                <p><strong>דוגמאות:</strong> ${prompt.examples.join(', ')}</p>
+                <button onclick="copyToClipboard('${prompt.role} - ${prompt.task}')">העתק</button>
+            `;
+                        promptsContainer.appendChild(card);
+                    });
+                };
+
+                // סינון ההוראות לפי קטגוריה
+                const filterPrompts = () => {
+                    const selectedCategory = categoryFilter.value;
+                    const filteredPrompts = selectedCategory === 'all' ? promptsData : promptsData.filter(prompt => prompt.category === selectedCategory);
+                    displayPrompts(filteredPrompts);
+                };
+
+                categoryFilter.addEventListener('change', filterPrompts);
+                filterPrompts(); // הצגה ראשונית
+
+                // טיפול בטופס הוספת הוראה
+                addPromptForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+
+                    const newPrompt = {
+                        category: event.target.category.value,
+                        role: event.target.role.value,
+                        background: event.target.background.value,
+                        task: event.target.task.value,
+                        constraints: event.target.constraints.value.split(',').map(c => c.trim()),
+                        format: event.target.format.value,
+                        style: event.target.style.value,
+                        length: event.target.length.value,
+                        examples: event.target.examples.value.split(',').map(e => e.trim())
+                    };
+
+                    promptsData.push(newPrompt);
+                    displayPrompts(promptsData);
+
+                    // ניקוי הטופס
+                    addPromptForm.reset();
+                });
+            });
+
+            function copyToClipboard(text) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('ההוראה הועתקה!');
+                }, (err) => {
+                    console.error('Error copying text: ', err);
+                });
+            }
+
+        </script>
+    </div>
+
+</body>
+
+</html>

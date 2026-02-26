@@ -1,0 +1,116 @@
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        direction: rtl;
+        text-align: right;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    #categoryFilter {
+        display: block;
+        margin: 20px auto;
+    }
+
+    .prompt-card {
+        color: white;
+        background-color: #4a4a4a50;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 16px;
+        margin: 16px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .prompt-card button {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        cursor: pointer;
+    }
+
+    .prompt-card button:hover {
+        background-color: #0056b3;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="he">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Center</title>
+    <link rel="stylesheet" href="../../../0-css/Fresh.css">
+    <!-- <link rel="stylesheet" href="../../0-css/style.css"> -->
+</head>
+
+<body>
+    <h1>מרכז ההוראות</h1>
+    <select id="categoryFilter">
+        <option value="all">הכל</option>
+        <option value="Education">חינוך</option>
+        <option value="Project Management">ניהול פרויקטים</option>
+        <option value="Consulting">ייעוץ</option>
+        <option value="Creative Writing">כתיבה יצירתית</option>
+        <option value="Research">מחקר</option>
+        <option value="Design">עיצוב</option>
+        <option value="Marketing">שיווק</option>
+        <option value="Healthcare">בריאות</option>
+    </select>
+    <div id="promptsContainer"></div>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const promptsContainer = document.getElementById('promptsContainer');
+            const categoryFilter = document.getElementById('categoryFilter');
+
+            fetch('Prompts.json')
+                .then(response => response.json())
+                .then(data => {
+                    const displayPrompts = (prompts) => {
+                        promptsContainer.innerHTML = '';
+                        prompts.forEach(prompt => {
+                            const card = document.createElement('div');
+                            card.className = 'prompt-card';
+                            card.innerHTML = `
+                        <h2>${prompt.role}</h2>
+                        <p><strong>רקע:</strong> ${prompt.background}</p>
+                        <p><strong>משימה:</strong> ${prompt.task}</p>
+                        <p><strong>מגבלות:</strong> ${prompt.constraints.join(', ')}</p>
+                        <p><strong>פורמט:</strong> ${prompt.format}</p>
+                        <p><strong>סגנון:</strong> ${prompt.style}</p>
+                        <p><strong>אורך:</strong> ${prompt.length}</p>
+                        <p><strong>דוגמאות:</strong> ${prompt.examples.join(', ')}</p>
+                        <button onclick="copyToClipboard('${prompt.role} - ${prompt.task}')">העתק</button>
+                    `;
+                            promptsContainer.appendChild(card);
+                        });
+                    };
+
+                    const filterPrompts = () => {
+                        const selectedCategory = categoryFilter.value;
+                        const filteredPrompts = selectedCategory === 'all' ? data : data.filter(prompt => prompt.category === selectedCategory);
+                        displayPrompts(filteredPrompts);
+                    };
+
+                    categoryFilter.addEventListener('change', filterPrompts);
+                    filterPrompts(); // Initial display
+                });
+        });
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('ההוראה הועתקה!');
+            }, (err) => {
+                console.error('Error copying text: ', err);
+            });
+        }
+
+    </script>
+</body>
+
+</html>

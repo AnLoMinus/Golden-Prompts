@@ -1,0 +1,1565 @@
+<style>
+    html,
+    dark-mode,
+    prompt-form,
+    #prompt-form input,
+    #prompt-form textarea,
+    #prompt-form select,
+    body.dark-mode input[type="text"],
+    body.dark-mode textarea,
+    body.dark-mode select {
+        direction: rtl;
+        text-align: center;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="he">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Prompts Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script> <!-- Corrected to use <script> tag -->
+</head>
+
+<body class="dark-mode">
+    <header style="
+    justify-content: space-evenly;
+">
+
+        <h1>יוצר פקודות ChatGPT</h1>
+        <div class="header-buttons">
+            <button id="theme-toggle" aria-label="Toggle Dark Mode">מצב לילה</button>
+            <button id="toggle-display" aria-label="Toggle Display">הצג את כל החלונות</button>
+            <button id="reset-settings" aria-label="Reset Settings">אפס הגדרות</button>
+            <button id="feedback" aria-label="Send Feedback">שלח משוב</button>
+            <button id="help" aria-label="Help">עזרה</button>
+            <button id="settings" aria-label="Open Settings">הגדרות</button>
+            <button id="search" aria-label="Search">חפש</button>
+        </div>
+
+        <div id="notification-dropdown" class="dropdown">
+            <div class="dropdown-header">התראות</div>
+            <div class="dropdown-content">
+                <p>אין התראות חדשות.</p>
+            </div>
+        </div>
+        <div id="search-container" class="search-container">
+            <input type="text" id="search-input" placeholder="חפש..." aria-label="Search" />
+            <button id="search-button" aria-label="Search">🔍</button>
+        </div>
+        <style>
+            header {
+                /* justify-content: space-evenly; */
+                background-color: #1e1e1e;
+                /* Dark background color */
+                padding: 20px;
+                border-bottom: 2px solid #333;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+                /* Darker shadow for modern look */
+                flex-wrap: wrap;
+                /* Ensure responsiveness */
+            }
+
+            header h1 {
+                margin: 0;
+                font-size: 28px;
+                /* Increased font size for prominence */
+                color: #ffffff;
+                /* White text */
+            }
+
+            .header-buttons {
+                display: flex;
+                gap: 15px;
+                /* Increased gap for better spacing */
+                margin: 10px 0;
+                /* Margin for spacing */
+            }
+
+            .header-buttons button {
+                padding: 12px 18px;
+                /* Larger padding for better touch targets */
+                border: none;
+                border-radius: 6px;
+                /* Slightly larger border-radius for a softer look */
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+                color: #ffffff;
+                /* White text */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                /* Subtle shadow for depth */
+            }
+
+            .header-buttons button:hover {
+                background-color: #0056b3;
+                /* Darker blue for hover effect */
+                transform: scale(1.05);
+            }
+
+            .header-buttons button:active {
+                background-color: #003d7a;
+                /* Even darker blue for active effect */
+                transform: scale(1);
+            }
+
+            #theme-toggle {
+                background-color: #007bff;
+                /* Blue for theme toggle */
+            }
+
+            #toggle-display {
+                background-color: #17a2b8;
+                /* Teal for display toggle */
+            }
+
+            #reset-settings {
+                background-color: #dc3545;
+                /* Red for reset settings */
+            }
+
+            #feedback {
+                background-color: #28a745;
+                /* Green for feedback */
+            }
+
+            #help {
+                background-color: #ffc107;
+                /* Yellow for help */
+            }
+
+            #settings {
+                background-color: #6c757d;
+                /* Grey for settings */
+            }
+
+            #search {
+                background-color: #343a40;
+                /* Dark grey for search */
+            }
+
+            .header-icons {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+            }
+
+            .header-icons img {
+                width: 24px;
+                /* Consistent icon size */
+                height: 24px;
+                cursor: pointer;
+                transition: transform 0.2s ease;
+            }
+
+            .header-icons img:hover {
+                transform: scale(1.1);
+                /* Slightly larger on hover */
+            }
+
+            #notification-dropdown {
+                display: none;
+                /* Hidden by default */
+                position: absolute;
+                top: 60px;
+                /* Adjust according to header height */
+                right: 20px;
+                width: 250px;
+                background-color: #333;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                color: #fff;
+                z-index: 1000;
+            }
+
+            .dropdown-header {
+                padding: 10px;
+                border-bottom: 1px solid #444;
+                font-weight: bold;
+            }
+
+            .dropdown-content {
+                padding: 10px;
+                max-height: 200px;
+                overflow-y: auto;
+            }
+
+            .search-container {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-top: 10px;
+                /* Spacing for the search bar */
+            }
+
+            #search-input {
+                padding: 8px;
+                border: none;
+                border-radius: 4px;
+                font-size: 16px;
+                width: 200px;
+                /* Adjust width as needed */
+            }
+
+            #search-button {
+                padding: 8px 12px;
+                border: none;
+                border-radius: 4px;
+                background-color: #007bff;
+                color: #ffffff;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.3s ease;
+            }
+
+            #search-button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+        <script>
+            document.getElementById('notifications-icon').addEventListener('click', () => {
+                const dropdown = document.getElementById('notification-dropdown');
+                dropdown.style.display = dropdown.style.display === 'none' || dropdown.style.display === '' ? 'block' : 'none';
+            });
+
+            document.getElementById('search-input').addEventListener('input', function () {
+                const query = this.value.toLowerCase();
+                // Implement live search functionality here (e.g., filter results)
+            });
+        </script>
+    </header>
+
+
+
+    <main class="container">
+        <section id="profile-management-section" class="section active">
+            <h2>ניהול פרופילים</h2>
+            <form id="profile-form" class="profile-form">
+                <div class="form-group">
+                    <label for="profileName">שם פרופיל:</label>
+                    <input type="text" id="profileName" name="profileName" placeholder="הכנס שם פרופיל חדש"
+                        aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="profileDescription">תיאור פרופיל:</label>
+                    <textarea id="profileDescription" name="profileDescription" rows="3"
+                        placeholder="הכנס תיאור לפרופיל" aria-required="true"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="profileTone">טון דיבור:</label>
+                    <select id="profileTone" name="profileTone" aria-required="true">
+                        <option value="formal">רשמי</option>
+                        <option value="friendly">ידידותי</option>
+                        <option value="professional">מקצועי</option>
+                        <option value="humorous">הומוריסטי</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="profileFormality">רמת פורמליות:</label>
+                    <select id="profileFormality" name="profileFormality" aria-required="true">
+                        <option value="formal">פורמלי</option>
+                        <option value="informal">לא פורמלי</option>
+                        <option value="semi-formal">חצי פורמלי</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="profileInterests">תחומי עניין:</label>
+                    <input type="text" id="profileInterests" name="profileInterests"
+                        placeholder="הכנס תחומי עניין (מופרדים בפסיקים)" aria-required="true">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" onclick="createProfile()">צור פרופיל</button>
+                </div>
+            </form>
+            <h3>פרופילים קיימים</h3>
+            <ul id="profileList" class="profile-list"></ul>
+            <div id="template-section" class="template-section">
+                <h2>תבניות שמורות</h2>
+                <div class="form-group">
+                    <label for="template-list">בחר תבנית לטעינה:</label>
+                    <select id="template-list" aria-label="Select a template to load"></select>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="btn btn-info" onclick="loadTemplate()">טען תבנית</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteTemplate()">מחק תבנית</button>
+                    <button type="button" class="btn btn-success" onclick="exportTemplate()">ייצא תבנית</button>
+                    <button type="button" class="btn btn-warning" onclick="importTemplate()">ייבא תבנית</button>
+                </div>
+            </div>
+            <style>
+                .section {
+                    padding: 20px;
+                    margin: 20px 0;
+                }
+
+                .profile-form {
+                    max-width: 600px;
+                    margin: 0 auto;
+                }
+
+                .form-group {
+                    margin-bottom: 20px;
+                }
+
+                .form-group label {
+                    display: block;
+                    margin-bottom: 5px;
+                    font-weight: bold;
+                }
+
+                .form-group input[type="text"],
+                .form-group textarea,
+                .form-group select {
+                    width: 100%;
+                    padding: 10px;
+                    border-radius: 5px;
+                    border: 1px solid #ccc;
+                    font-size: 16px;
+                }
+
+                .profile-list {
+                    list-style-type: none;
+                    padding: 0;
+                }
+
+                .profile-list li {
+                    margin-bottom: 10px;
+                }
+
+                .template-section {
+                    margin-top: 30px;
+                }
+
+                .template-section .form-group {
+                    margin-bottom: 10px;
+                }
+
+                .template-section .button-group {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    justify-content: center;
+                }
+
+                .button-group .btn {
+                    flex: 1 1 auto;
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 5px;
+                    font-size: 16px;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease, transform 0.2s ease;
+                }
+
+                .button-group .btn:hover {
+                    background-color: #0056b3;
+                    /* Adjust for hover effect */
+                    transform: scale(1.05);
+                }
+
+                .button-group .btn:active {
+                    background-color: #004080;
+                    /* Adjust for active effect */
+                    transform: scale(1);
+                }
+
+                .btn-primary {
+                    background-color: #007bff;
+                    color: #fff;
+                }
+
+                .btn-info {
+                    background-color: #17a2b8;
+                    color: #fff;
+                }
+
+                .btn-danger {
+                    background-color: #dc3545;
+                    color: #fff;
+                }
+
+                .btn-success {
+                    background-color: #28a745;
+                    color: #fff;
+                }
+
+                .btn-warning {
+                    background-color: #ffc107;
+                    color: #212529;
+                }
+            </style>
+        </section>
+
+        <section id="prompt-form-section" class="section">
+            <h2>צור פקודה</h2>
+            <form id="prompt-form" aria-labelledby="prompt-form-section">
+                <div class="form-group">
+                    <label for="category">קטגוריה:</label>
+                    <select id="category" name="category" aria-required="true">
+                        <option value="">בחר קטגוריה</option>
+                        <option value="general">כללי</option>
+                        <option value="technology">טכנולוגיה</option>
+                        <option value="health">בריאות</option>
+                        <option value="education">חינוך</option>
+                        <option value="entertainment">בידור</option>
+                        <option value="finance">פיננסים</option>
+                        <option value="travel">נסיעות</option>
+                        <option value="food">אוכל</option>
+                        <option value="sports">ספורט</option>
+                        <option value="lifestyle">אורח חיים</option>
+                        <option value="science">מדע</option>
+                        <option value="art">אמנות</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tone">טון:</label>
+                    <select id="tone" name="tone" aria-required="true">
+                        <option value="">בחר טון</option>
+                        <option value="formal">רשמי</option>
+                        <option value="informal">לא רשמי</option>
+                        <option value="friendly">ידידותי</option>
+                        <option value="professional">מקצועי</option>
+                        <option value="humorous">הומוריסטי</option>
+                        <option value="serious">רציני</option>
+                        <option value="persuasive">משכנע</option>
+                        <option value="inspirational">מעורר השראה</option>
+                        <option value="concise">תמציתי</option>
+                        <option value="descriptive">תיאורי</option>
+                        <option value="narrative">נרטיבי</option>
+                        <option value="technical">טכני</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="length">אורך:</label>
+                    <select id="length" name="length" aria-required="true">
+                        <option value="">בחר אורך</option>
+                        <option value="short">קצר</option>
+                        <option value="medium">בינוני</option>
+                        <option value="long">ארוך</option>
+                        <option value="very-long">מאוד ארוך</option>
+                        <option value="one-sentence">משפט אחד</option>
+                        <option value="paragraph">פסקה</option>
+                        <option value="detailed">מפורט</option>
+                        <option value="summary">סיכום</option>
+                        <option value="bullet-points">נקודות</option>
+                        <option value="dialogue">דיאלוג</option>
+                        <option value="outline">מתווה</option>
+                        <option value="essay">מאמר</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="keywords">מילות מפתח:</label>
+                    <input type="text" id="keywords" name="keywords" placeholder="הכנס מילות מפתח (מופרדות בפסיקים)"
+                        aria-describedby="keywords-desc">
+                    <small id="keywords-desc">הכנס מילות מפתח שקשורות לפקודה, מופרדות בפסיקים.</small>
+                </div>
+
+                <div class="form-group">
+                    <label>כלול:</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="include" value="examples"> דוגמאות</label>
+                        <label><input type="checkbox" name="include" value="explanations"> הסברים</label>
+                        <label><input type="checkbox" name="include" value="tips"> טיפים</label>
+                        <label><input type="checkbox" name="include" value="statistics"> סטטיסטיקות</label>
+                        <label><input type="checkbox" name="include" value="quotes"> ציטוטים</label>
+                        <label><input type="checkbox" name="include" value="case-studies"> מקרים לדוגמה</label>
+                        <label><input type="checkbox" name="include" value="references"> הפניות</label>
+                        <label><input type="checkbox" name="include" value="images"> תמונות</label>
+                        <label><input type="checkbox" name="include" value="videos"> סרטונים</label>
+                        <label><input type="checkbox" name="include" value="links"> קישורים</label>
+                        <label><input type="checkbox" name="include" value="checklists"> רשימות בדיקה</label>
+                        <label><input type="checkbox" name="include" value="summaries"> סיכומים</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="format">פורמט פלט:</label>
+                    <select id="format" name="format" aria-required="true">
+                        <option value="">בחר פורמט</option>
+                        <option value="plain">טקסט פשוט</option>
+                        <option value="markdown">Markdown</option>
+                        <option value="html">HTML</option>
+                        <option value="json">JSON</option>
+                        <option value="xml">XML</option>
+                        <option value="csv">CSV</option>
+                        <option value="pdf">PDF</option>
+                        <option value="docx">DOCX</option>
+                        <option value="pptx">PPTX</option>
+                        <option value="latex">LaTeX</option>
+                        <option value="text-file">קובץ טקסט</option>
+                        <option value="image">תמונה</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="language">שפה:</label>
+                    <select id="language" name="language" aria-required="true">
+                        <option value="">בחר שפה</option>
+                        <option value="hebrew">עברית</option>
+                        <option value="english">אנגלית</option>
+                        <option value="spanish">ספרדית</option>
+                        <option value="french">צרפתית</option>
+                        <option value="german">גרמנית</option>
+                        <option value="italian">איטלקית</option>
+                        <option value="portuguese">פורטוגזית</option>
+                        <option value="russian">רוסית</option>
+                        <option value="chinese">סינית</option>
+                        <option value="japanese">יפנית</option>
+                        <option value="korean">קוריאנית</option>
+                        <option value="arabic">ערבית</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="targetAudience">קהל יעד:</label>
+                    <input type="text" id="targetAudience" name="targetAudience" placeholder="הכנס קהל יעד">
+                </div>
+
+                <div class="form-group">
+                    <label for="context">הקשר:</label>
+                    <textarea id="context" name="context" rows="4" placeholder="הכנס הקשר לפקודה"></textarea>
+                </div>
+
+                <div class="form-group button-group">
+                    <button type="button" class="btn btn-primary" onclick="generatePrompt()">צור פקודה</button>
+                    <button type="button" class="btn btn-secondary" onclick="exportPrompt()">ייצא פקודה</button>
+                    <button type="button" class="btn btn-success" onclick="saveTemplate()">שמור תבנית</button>
+                    <button type="button" class="btn btn-info" onclick="loadTemplate()">טען תבנית</button>
+                    <button type="button" class="btn btn-warning" onclick="clearForm()">נקה טופס</button>
+                    <button type="button" class="btn btn-light" onclick="previewPrompt()">תצוגה מקדימה</button>
+                    <button type="button" class="btn btn-dark" onclick="copyToClipboard()">העתק ללוח</button>
+                    <button type="button" class="btn btn-danger" onclick="printPrompt()">הדפס פקודה</button>
+                    <button type="button" class="btn btn-primary" onclick="sharePrompt()">שתף פקודה</button>
+                    <button type="button" class="btn btn-secondary" onclick="saveAsTemplate()">שמור כתבנית</button>
+                    <button type="button" class="btn btn-info" onclick="loadFromFile()">טען מקובץ</button>
+                    <style>
+                        .button-group {
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 10px;
+                            justify-content: center;
+                            margin-top: 20px;
+                        }
+
+                        .btn {
+                            padding: 10px 20px;
+                            border: none;
+                            border-radius: 5px;
+                            color: #fff;
+                            cursor: pointer;
+                            transition: background-color 0.3s;
+                            font-size: 14px;
+                            text-align: center;
+                        }
+
+                        .btn-primary {
+                            background-color: #007bff;
+                        }
+
+                        .btn-primary:hover {
+                            background-color: #0056b3;
+                        }
+
+                        .btn-secondary {
+                            background-color: #6c757d;
+                        }
+
+                        .btn-secondary:hover {
+                            background-color: #545b62;
+                        }
+
+                        .btn-success {
+                            background-color: #28a745;
+                        }
+
+                        .btn-success:hover {
+                            background-color: #218838;
+                        }
+
+                        .btn-info {
+                            background-color: #17a2b8;
+                        }
+
+                        .btn-info:hover {
+                            background-color: #117a8b;
+                        }
+
+                        .btn-warning {
+                            background-color: #ffc107;
+                            color: #212529;
+                        }
+
+                        .btn-warning:hover {
+                            background-color: #e0a800;
+                        }
+
+                        .btn-light {
+                            background-color: #f8f9fa;
+                            color: #212529;
+                        }
+
+                        .btn-light:hover {
+                            background-color: #e2e6ea;
+                        }
+
+                        .btn-dark {
+                            background-color: #343a40;
+                        }
+
+                        .btn-dark:hover {
+                            background-color: #23272b;
+                        }
+
+                        .btn-danger {
+                            background-color: #dc3545;
+                        }
+
+                        .btn-danger:hover {
+                            background-color: #c82333;
+                        }
+
+                        @media (max-width: 600px) {
+                            .btn {
+                                width: 100%;
+                                margin-bottom: 10px;
+                            }
+
+                            .button-group {
+                                flex-direction: column;
+                            }
+                        }
+                    </style>
+                </div>
+
+            </form>
+            <style>
+                #prompt-form-section {
+                    /* padding: 20px; */
+                    /* border: 1px solid #ccc; */
+                    border-radius: 10px;
+                    /* background-color: #f7f7f7; */
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                    max-width: 800px;
+                    /* margin: auto; */
+                    font-family: Arial, sans-serif;
+                }
+
+                .section h2 {
+                    text-align: center;
+                    color: #333;
+                    margin-bottom: 20px;
+                }
+
+                .form-group {
+                    margin-bottom: 15px;
+                }
+
+                .form-group label {
+                    display: block;
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                    color: #555;
+                }
+
+                .form-group input[type="text"],
+                .form-group select,
+                .form-group textarea {
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    box-sizing: border-box;
+                }
+
+                .form-group textarea {
+                    resize: vertical;
+                }
+
+                .checkbox-group {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                }
+
+                .checkbox-group label {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    background-color: #e9ecef;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+
+                .checkbox-group input[type="checkbox"] {
+                    margin-right: 5px;
+                }
+
+                .checkbox-group label:hover {
+                    background-color: #d6dbdf;
+                }
+
+                .button-group {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    justify-content: center;
+                    margin-top: 20px;
+                }
+
+                .btn {
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 5px;
+                    color: #fff;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+
+                .btn-primary {
+                    background-color: #007bff;
+                }
+
+                .btn-primary:hover {
+                    background-color: #0056b3;
+                }
+
+                .btn-secondary {
+                    background-color: #6c757d;
+                }
+
+                .btn-secondary:hover {
+                    background-color: #545b62;
+                }
+
+                .btn-success {
+                    background-color: #28a745;
+                }
+
+                .btn-success:hover {
+                    background-color: #218838;
+                }
+
+                .btn-info {
+                    background-color: #17a2b8;
+                }
+
+                .btn-info:hover {
+                    background-color: #117a8b;
+                }
+
+                .btn-warning {
+                    background-color: #ffc107;
+                    color: #212529;
+                }
+
+                .btn-warning:hover {
+                    background-color: #e0a800;
+                }
+
+                .btn-light {
+                    background-color: #f8f9fa;
+                    color: #212529;
+                }
+
+                .btn-light:hover {
+                    background-color: #e2e6ea;
+                }
+
+                .btn-dark {
+                    background-color: #343a40;
+                }
+
+                .btn-dark:hover {
+                    background-color: #23272b;
+                }
+
+                .btn-danger {
+                    background-color: #dc3545;
+                }
+
+                .btn-danger:hover {
+                    background-color: #c82333;
+                }
+
+                @media (max-width: 600px) {
+                    .btn {
+                        width: 100%;
+                        margin-bottom: 10px;
+                    }
+
+                    .checkbox-group {
+                        flex-direction: column;
+                    }
+                }
+            </style>
+        </section>
+
+
+        <section id="result-section" class="section">
+            <h2>תוצאות</h2>
+            <div id="result" class="result"></div>
+            <div class="button-container">
+                <button type="button" id="clear-results" class="button">נקה תוצאות</button>
+                <button type="button" id="copy-summary" class="button">העתק סיכום ללוח</button>
+            </div>
+            <script>
+                // פונקציות לשדרוג
+                function generatePrompt() {
+                    const category = document.getElementById('category').value;
+                    const tone = document.getElementById('tone').value;
+                    const length = document.getElementById('length').value;
+                    const keywords = document.getElementById('keywords').value;
+                    const include = Array.from(document.querySelectorAll('input[name="include"]:checked')).map(cb => cb.value).join(', ');
+                    const format = document.getElementById('format').value;
+                    const language = document.getElementById('language').value;
+                    const targetAudience = document.getElementById('targetAudience').value;
+                    const context = document.getElementById('context').value;
+
+                    const summary = `
+                        קטגוריה: ${category}
+                        טון: ${tone}
+                        אורך: ${length}
+                        מילות מפתח: ${keywords}
+                        כלול: ${include}
+                        פורמט פלט: ${format}
+                        שפה: ${language}
+                        קהל יעד: ${targetAudience}
+                        הקשר: ${context}
+                    `;
+
+                    document.getElementById('result').innerText = summary;
+                }
+
+                function copySummary() {
+                    const resultElement = document.getElementById('result');
+                    const range = document.createRange();
+                    range.selectNode(resultElement);
+                    window.getSelection().removeAllRanges();
+                    window.getSelection().addRange(range);
+
+                    try {
+                        document.execCommand('copy');
+                        alert('הסיכום הועתק ללוח!');
+                    } catch (err) {
+                        alert('לא הצלחנו להעתיק את הסיכום ללוח.');
+                    }
+
+                    window.getSelection().removeAllRanges();
+                }
+
+                function clearResults() {
+                    document.getElementById('result').innerText = '';
+                }
+
+                document.getElementById('clear-results').addEventListener('click', clearResults);
+                document.getElementById('copy-summary').addEventListener('click', copySummary);
+            </script>
+            <style>
+                .section {
+                    padding: 20px;
+                    background-color: #1e1e1e;
+                    color: #ffffff;
+                    border-radius: 8px;
+                }
+
+                .result {
+                    margin-bottom: 20px;
+                    padding: 10px;
+                    background-color: #333333;
+                    border: 1px solid #444444;
+                    border-radius: 4px;
+                    white-space: pre-wrap;
+                    /* Maintain formatting of the summary */
+                    word-wrap: break-word;
+                    /* Ensure long text wraps correctly */
+                    overflow-x: auto;
+                    /* Add horizontal scroll if needed */
+                }
+
+                .button-container {
+                    display: flex;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                    /* Ensure buttons wrap on smaller screens */
+                }
+
+                .button {
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    background-color: #007bff;
+                    color: #ffffff;
+                    font-size: 16px;
+                    transition: background-color 0.3s, box-shadow 0.3s;
+                    /* Smooth transitions */
+                }
+
+                .button:hover {
+                    background-color: #0056b3;
+                }
+
+                .button:active {
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+                    /* Add shadow on click */
+                }
+            </style>
+        </section>
+
+        <section id="prompt-section" class="section">
+            <h2>הוסף וערוך פקודות</h2>
+            <form id="prompt-form">
+                <div class="form-group">
+                    <label for="prompt-name">שם הפקודה:</label>
+                    <input type="text" id="prompt-name" placeholder="הכנס שם לפקודה" required />
+                </div>
+                <div class="form-group">
+                    <label for="prompt-content">תוכן הפקודה:</label>
+                    <textarea id="prompt-content" placeholder="הכנס תוכן לפקודה" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="prompt-theme">בחר נושא:</label>
+                    <select id="prompt-theme">
+                        <option value="default">ברירת מחדל</option>
+                        <option value="cyberpunk">סייברפאנק</option>
+                        <option value="dark">אפל</option>
+                        <option value="serene">רגוע</option>
+                        <option value="warm">חמים</option>
+                    </select>
+                </div>
+                <div class="button-container">
+                    <button type="button" id="save-prompt" class="button">שמור פקודה</button>
+                    <button type="button" id="load-theme" class="button">טען נושא</button>
+                </div>
+            </form>
+
+            <div id="prompt-list" class="prompt-list">
+                <h3>רשימת פקודות</h3>
+                <ul id="prompts"></ul>
+            </div>
+
+            <style>
+                #prompt-section {
+                    background: linear-gradient(135deg, #333, #222);
+                    padding: 25px;
+                    border-radius: 12px;
+                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+                    color: #f0f0f0;
+                    transition: background 0.3s ease;
+                }
+
+                #prompt-section:hover {
+                    background: linear-gradient(135deg, #444, #333);
+                }
+
+                #prompt-form {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                }
+
+                .form-group {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .form-group label {
+                    font-weight: bold;
+                    margin-bottom: 8px;
+                    color: #9c9c9c;
+                }
+
+                #prompt-form input,
+                #prompt-form textarea,
+                #prompt-form select {
+                    padding: 12px;
+                    border: 1px solid #555;
+                    border-radius: 6px;
+                    background-color: #2b2b2b;
+                    color: #ddd;
+                    transition: border-color 0.3s ease;
+                    font-size: 16px;
+                }
+
+                #prompt-form input:focus,
+                #prompt-form textarea:focus,
+                #prompt-form select:focus {
+                    border-color: #00aaff;
+                    outline: none;
+                }
+
+                .button-container {
+                    display: flex;
+                    justify-content: space-around;
+                    margin-top: 25px;
+                }
+
+                .button {
+                    padding: 12px 30px;
+                    border: none;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    background-color: #00aaff;
+                    color: #ffffff;
+                    font-size: 18px;
+                    transition: background-color 0.3s ease, transform 0.2s ease;
+                }
+
+                .button:hover {
+                    background-color: #008ecc;
+                    transform: translateY(-2px);
+                }
+
+                .button:active {
+                    background-color: #006b99;
+                    transform: translateY(0);
+                }
+
+                .prompt-list {
+                    margin-top: 35px;
+                }
+
+                .prompt-list h3 {
+                    margin-bottom: 18px;
+                    border-bottom: 2px solid #555;
+                    padding-bottom: 12px;
+                }
+
+                .prompt-list ul {
+                    list-style-type: none;
+                    padding: 0;
+                }
+
+                .prompt-list li {
+                    padding: 18px;
+                    margin-bottom: 12px;
+                    background-color: #3b3b3b;
+                    border-radius: 6px;
+                    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+                    color: #eee;
+                    transition: background-color 0.3s ease, transform 0.2s ease;
+                }
+
+                .prompt-list li:hover {
+                    background-color: #4a4a4a;
+                    transform: scale(1.02);
+                }
+            </style>
+
+            <script>
+                document.getElementById('save-prompt').addEventListener('click', function () {
+                    const name = document.getElementById('prompt-name').value;
+                    const content = document.getElementById('prompt-content').value;
+                    const theme = document.getElementById('prompt-theme').value;
+
+                    if (name && content) {
+                        const prompts = JSON.parse(localStorage.getItem('prompts')) || [];
+                        prompts.push({ name, content, theme });
+                        localStorage.setItem('prompts', JSON.stringify(prompts));
+                        updatePromptList();
+                        document.getElementById('prompt-form').reset();
+                    } else {
+                        alert('נא למלא את כל השדות.');
+                    }
+                });
+
+                document.getElementById('load-theme').addEventListener('click', function () {
+                    const theme = document.getElementById('prompt-theme').value;
+                    if (theme) {
+                        document.body.className = ''; // Remove any existing classes
+                        document.body.classList.add(theme);
+                    }
+                });
+
+                function updatePromptList() {
+                    const prompts = JSON.parse(localStorage.getItem('prompts')) || [];
+                    const promptsList = document.getElementById('prompts');
+                    promptsList.innerHTML = '';
+                    prompts.forEach(prompt => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `${prompt.name}: ${prompt.content}`;
+                        promptsList.appendChild(listItem);
+                    });
+                }
+
+                // Initialize prompt list on page load
+                document.addEventListener('DOMContentLoaded', updatePromptList);
+            </script>
+        </section>
+
+        <section id="settings-section" class="section">
+            <h2>הגדרות</h2>
+            <div class="window-options">
+                <button class="btn btn-primary" onclick="openSettings()">הגדרות</button>
+                <button class="btn btn-secondary" onclick="openConfigure()">הגדר</button>
+                <button class="btn btn-info" onclick="toggleHelp()">עזרה</button>
+            </div>
+            <div class="form-group">
+                <label for="fontSize">גודל גופן:</label>
+                <select id="fontSize" onchange="changeFontSize()">
+                    <option value="12px">קטן מאוד</option>
+                    <option value="14px">קטן בינוני</option>
+                    <option value="16px">קטן</option>
+                    <option value="18px">בינוני קטן</option>
+                    <option value="20px">בינוני</option>
+                    <option value="22px">בינוני גדול</option>
+                    <option value="24px">גדול</option>
+                    <option value="26px">גדול בינוני</option>
+                    <option value="28px">מאוד גדול</option>
+                    <option value="30px">ענק</option>
+                    <option value="32px">ענק מאוד</option>
+                    <option value="36px">ענק ענק</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="languageSetting">שפה:</label>
+                <select id="languageSetting" onchange="changeLanguage()">
+                    <option value="hebrew">עברית</option>
+                    <option value="english">אנגלית</option>
+                    <option value="spanish">ספרדית</option>
+                    <option value="french">צרפתית</option>
+                    <option value="german">גרמנית</option>
+                    <option value="italian">איטלקית</option>
+                    <option value="portuguese">פורטוגזית</option>
+                    <option value="russian">רוסית</option>
+                    <option value="chinese">סינית</option>
+                    <option value="japanese">יפנית</option>
+                    <option value="korean">קוריאנית</option>
+                    <option value="arabic">ערבית</option>
+                </select>
+            </div>
+            <div class="form-group button-group">
+                <button type="button" class="btn btn-warning" onclick="resetFields()">אפס שדות</button>
+                <button type="button" class="btn btn-success" onclick="toggleNotifications()">הפעל/כבה התראות</button>
+                <button type="button" class="btn btn-danger" onclick="toggleAutoSave()">הפעל/כבה שמירה אוטומטית</button>
+                <button type="button" class="btn btn-info" onclick="exportSettings()">ייצא הגדרות</button>
+                <button type="button" class="btn btn-primary" onclick="importSettings()">ייבא הגדרות</button>
+            </div>
+            <style>
+                .section {
+                    padding: 20px;
+                    margin: 20px 0;
+                }
+
+                .window-options {
+                    display: flex;
+                    gap: 10px;
+                    margin-bottom: 20px;
+                }
+
+                .window-options .btn {
+                    flex: 1;
+                    padding: 10px;
+                    border-radius: 5px;
+                    font-size: 16px;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease, transform 0.2s ease;
+                }
+
+                .window-options .btn:hover {
+                    background-color: #0056b3;
+                    /* Adjust for hover effect */
+                    transform: scale(1.05);
+                }
+
+                .window-options .btn:active {
+                    background-color: #004080;
+                    /* Adjust for active effect */
+                    transform: scale(1);
+                }
+
+                .form-group {
+                    margin-bottom: 20px;
+                }
+
+                .form-group label {
+                    display: block;
+                    margin-bottom: 5px;
+                    font-weight: bold;
+                }
+
+                .form-group select,
+                .form-group input[type="text"],
+                .form-group textarea {
+                    width: 100%;
+                    padding: 10px;
+                    border-radius: 5px;
+                    border: 1px solid #ccc;
+                    font-size: 16px;
+                }
+
+                .button-group {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    justify-content: center;
+                }
+
+                .button-group .btn {
+                    flex: 1 1 auto;
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 5px;
+                    font-size: 16px;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease, transform 0.2s ease;
+                }
+
+                .button-group .btn:hover {
+                    background-color: #0056b3;
+                    /* Adjust for hover effect */
+                    transform: scale(1.05);
+                }
+
+                .button-group .btn:active {
+                    background-color: #004080;
+                    /* Adjust for active effect */
+                    transform: scale(1);
+                }
+
+                .btn-primary {
+                    background-color: #007bff;
+                    color: #fff;
+                }
+
+                .btn-secondary {
+                    background-color: #6c757d;
+                    color: #fff;
+                }
+
+                .btn-success {
+                    background-color: #28a745;
+                    color: #fff;
+                }
+
+                .btn-info {
+                    background-color: #17a2b8;
+                    color: #fff;
+                }
+
+                .btn-warning {
+                    background-color: #ffc107;
+                    color: #212529;
+                }
+
+                .btn-light {
+                    background-color: #f8f9fa;
+                    color: #212529;
+                }
+
+                .btn-dark {
+                    background-color: #343a40;
+                    color: #fff;
+                }
+
+                .btn-danger {
+                    background-color: #dc3545;
+                    color: #fff;
+                }
+            </style>
+        </section>
+
+        <section id="new-content-section" class="section">
+            <h2>תוכן חדש</h2>
+            <textarea id="newContent" rows="4" placeholder="הכנס תוכן חדש כאן"></textarea>
+            <div class="form-group">
+                <button type="button" onclick="addNewContent()">הוסף תוכן חדש</button>
+                <button type="button" onclick="clearNewContent()">נקה תוכן חדש</button>
+            </div>
+        </section>
+
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const profiles = [];
+
+            // Profile Management Functions
+            function createProfile() {
+                const name = document.getElementById("profileName").value;
+                const description = document.getElementById("profileDescription").value;
+                const tone = document.getElementById("profileTone").value;
+                const formality = document.getElementById("profileFormality").value;
+                const interests = document.getElementById("profileInterests").value;
+
+                if (!name) {
+                    alert("נא הכנס שם לפרופיל");
+                    return;
+                }
+
+                const profile = { name, description, tone, formality, interests };
+                profiles.push(profile);
+                updateProfileList();
+                clearProfileForm();
+            }
+
+            function updateProfileList() {
+                const profileList = document.getElementById("profileList");
+                profileList.innerHTML = "";
+                profiles.forEach((profile, index) => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = `${profile.name} - ${profile.description}`;
+                    const editButton = document.createElement("button");
+                    editButton.textContent = "ערוך";
+                    editButton.onclick = () => editProfile(index);
+                    const deleteButton = document.createElement("button");
+                    deleteButton.textContent = "מחק";
+                    deleteButton.onclick = () => deleteProfile(index);
+                    listItem.appendChild(editButton);
+                    listItem.appendChild(deleteButton);
+                    profileList.appendChild(listItem);
+                });
+            }
+
+            function editProfile(index) {
+                const profile = profiles[index];
+                document.getElementById("profileName").value = profile.name;
+                document.getElementById("profileDescription").value = profile.description;
+                document.getElementById("profileTone").value = profile.tone;
+                document.getElementById("profileFormality").value = profile.formality;
+                document.getElementById("profileInterests").value = profile.interests;
+                profiles.splice(index, 1); // Remove the profile to allow for re-creation
+                updateProfileList();
+            }
+
+            function deleteProfile(index) {
+                if (confirm("האם אתה בטוח שברצונך למחוק את הפרופיל הזה?")) {
+                    profiles.splice(index, 1);
+                    updateProfileList();
+                }
+            }
+
+            function clearProfileForm() {
+                document.getElementById("profileName").value = "";
+                document.getElementById("profileDescription").value = "";
+                document.getElementById("profileTone").value = "formal";
+                document.getElementById("profileFormality").value = "formal";
+                document.getElementById("profileInterests").value = "";
+            }
+
+            // Prompt Management Functions
+            function generatePrompt() {
+                // קבלת הערכים מהטופס
+                const name = document.getElementById("profileName").value;
+                const description = document.getElementById("profileDescription").value;
+                const formality = document.getElementById("profileFormality").value;
+                const interests = document.getElementById("profileInterests").value;
+                const category = document.getElementById('category').value;
+                const tone = document.getElementById('tone').value;
+                const length = document.getElementById('length').value;
+                const keywords = document.getElementById('keywords').value;
+                const include = Array.from(document.querySelectorAll('input[name="include"]:checked')).map(cb => cb.value).join(', ');
+                const format = document.getElementById('format').value;
+                const language = document.getElementById('language').value;
+                const targetAudience = document.getElementById('targetAudience').value;
+                const context = document.getElementById('context').value;
+
+                // יצירת הסיכום
+                const summary = `
+                תיאור: ${name} 
+                השם שלך: ${description} 
+                קטגוריה: ${category}
+                טון: ${tone}
+                אורך: ${length}
+                מילות מפתח: ${keywords}
+                כלול: ${include}
+                פורמט פלט: ${format}
+                שפה: ${language}
+                קהל יעד: ${targetAudience}
+                הקשר: ${context}
+                            `;
+
+                // הצגת הסיכום
+                document.getElementById('result').innerText = summary;
+            }
+
+            function exportPrompt() {
+                // Placeholder for exporting prompt functionality
+                alert("הפקודה ייצאה!");
+            }
+
+            function saveTemplate() {
+                // Placeholder for saving template functionality
+                alert("התבנית נשמרה!");
+            }
+
+            function loadTemplate() {
+                // Placeholder for loading template functionality
+                alert("התבנית נטענה!");
+            }
+
+            function clearForm() {
+                document.getElementById("prompt-form").reset();
+            }
+
+            function previewPrompt() {
+                // Placeholder for previewing prompt functionality
+                alert("תצוגה מקדימה של הפקודה");
+            }
+
+            function copyToClipboard() {
+                // Placeholder for copying prompt to clipboard functionality
+                alert("הפקודה הועתקה ללוח!");
+            }
+
+            function printPrompt() {
+                // Placeholder for printing prompt functionality
+                alert("הפקודה הודפסה!");
+            }
+
+            function sharePrompt() {
+                // Placeholder for sharing prompt functionality
+                alert("הפקודה שותפה!");
+            }
+
+            function saveAsTemplate() {
+                // Placeholder for saving as template functionality
+                alert("נשמר כתבנית!");
+            }
+
+            function loadFromFile() {
+                // Placeholder for loading from file functionality
+                alert("טען מקובץ!");
+            }
+
+            function clearResults() {
+                const resultDiv = document.getElementById("result");
+                resultDiv.innerHTML = "";
+            }
+
+            // Settings Functions
+            function changeFontSize() {
+                const fontSize = document.getElementById("fontSize").value;
+                document.body.style.fontSize = fontSize;
+            }
+
+            function changeLanguage() {
+                const language = document.getElementById("languageSetting").value;
+                // Implement language change logic here
+                alert(`שפה שונתה ל-${language}`);
+            }
+
+            function resetFields() {
+                clearProfileForm();
+                clearForm();
+                clearResults();
+                // Implement additional field reset logic if needed
+            }
+
+            function toggleNotifications() {
+                // Placeholder for toggling notifications functionality
+                alert("התראות הופעלו/כובו!");
+            }
+
+            function toggleAutoSave() {
+                // Placeholder for toggling auto-save functionality
+                alert("שמירה אוטומטית הופעלה/כובתה!");
+            }
+
+            function exportSettings() {
+                // Placeholder for exporting settings functionality
+                alert("הגדרות ייצאו!");
+            }
+
+            function importSettings() {
+                // Placeholder for importing settings functionality
+                alert("הגדרות יובאו!");
+            }
+
+            // Event Listeners
+            document
+                .getElementById("theme-toggle")
+                .addEventListener("click", function () {
+                    document.body.classList.toggle("dark-mode");
+                });
+
+            document
+                .getElementById("toggle-display")
+                .addEventListener("click", function () {
+                    const sections = document.querySelectorAll(".section");
+                    sections.forEach((section) => {
+                        section.classList.toggle("active");
+                    });
+                });
+
+            document
+                .getElementById("reset-settings")
+                .addEventListener("click", resetFields);
+
+            document
+                .querySelector("#profile-form button")
+                .addEventListener("click", createProfile);
+
+            document
+                .querySelector('#prompt-form button[onclick="generatePrompt()"]')
+                .addEventListener("click", generatePrompt);
+            document
+                .querySelector('#prompt-form button[onclick="exportPrompt()"]')
+                .addEventListener("click", exportPrompt);
+            document
+                .querySelector('#prompt-form button[onclick="saveTemplate()"]')
+                .addEventListener("click", saveTemplate);
+            document
+                .querySelector('#prompt-form button[onclick="loadTemplate()"]')
+                .addEventListener("click", loadTemplate);
+            document
+                .querySelector('#prompt-form button[onclick="clearForm()"]')
+                .addEventListener("click", clearForm);
+            document
+                .querySelector('#prompt-form button[onclick="previewPrompt()"]')
+                .addEventListener("click", previewPrompt);
+            document
+                .querySelector('#prompt-form button[onclick="copyToClipboard()"]')
+                .addEventListener("click", copyToClipboard);
+            document
+                .querySelector('#prompt-form button[onclick="printPrompt()"]')
+                .addEventListener("click", printPrompt);
+            document
+                .querySelector('#prompt-form button[onclick="sharePrompt()"]')
+                .addEventListener("click", sharePrompt);
+            document
+                .querySelector('#prompt-form button[onclick="saveAsTemplate()"]')
+                .addEventListener("click", saveAsTemplate);
+            document
+                .querySelector('#prompt-form button[onclick="loadFromFile()"]')
+                .addEventListener("click", loadFromFile);
+
+            document
+                .querySelector("#result-section button")
+                .addEventListener("click", clearResults);
+
+            document
+                .querySelector("#settings-section #fontSize")
+                .addEventListener("change", changeFontSize);
+            document
+                .querySelector("#settings-section #languageSetting")
+                .addEventListener("change", changeLanguage);
+            document
+                .querySelector('#settings-section button[onclick="resetFields()"]')
+                .addEventListener("click", resetFields);
+            document
+                .querySelector('#settings-section button[onclick="toggleNotifications()"]')
+                .addEventListener("click", toggleNotifications);
+            document
+                .querySelector('#settings-section button[onclick="toggleAutoSave()"]')
+                .addEventListener("click", toggleAutoSave);
+            document
+                .querySelector('#settings-section button[onclick="exportSettings()"]')
+                .addEventListener("click", exportSettings);
+            document
+                .querySelector('#settings-section button[onclick="importSettings()"]')
+                .addEventListener("click", importSettings);
+        });
+    </script>
+</body>
+
+</html>

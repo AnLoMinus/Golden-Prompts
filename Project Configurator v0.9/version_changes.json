@@ -1,0 +1,36 @@
+{
+    "0.9": [
+        {
+            "timestamp": "2023-05-15 10:00:00",
+            "description": "Upgraded to version 0.9"
+        },
+        {
+            "timestamp": "2023-05-15 10:01:00",
+            "description": "Added feature to export summary to text file"
+        },
+        {
+            "timestamp": "2023-05-15 10:02:00",
+            "description": "Improved UI with icons"
+        },
+        {
+            "timestamp": "2023-05-15 10:03:00",
+            "description": "Added option to change interface language"
+        },
+        {
+            "timestamp": "2023-05-15 10:04:00",
+            "description": "Added 'About' dialog"
+        },
+        {
+            "timestamp": "2024-10-21 03:44:50",
+            "description": "Applied preset: AI Project"
+        },
+        {
+            "timestamp": "2024-10-21 03:45:07",
+            "description": "All windows opened"
+        },
+        {
+            "timestamp": "2024-10-21 09:13:04",
+            "description": "Applied preset: AI Project"
+        }
+    ]
+}
